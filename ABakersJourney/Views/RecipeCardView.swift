@@ -9,18 +9,21 @@
 import SwiftUI
 
 struct RecipeCardView: View {
+    
+    @Binding var recipe: Recipe
+    
     var body: some View {
         ZStack {
             Rectangle()
                 .foregroundColor(.green)
                 .cornerRadius(20)
             VStack {
-                Text("Titulo")
+                Text(recipe.title)
                 .font(Font.title)
                 HStack {
                     HStack {
                         Image(systemName: "timer")
-                        Text("00:02 m")
+                        Text("~26h")
                     }
                     
                 }
@@ -32,7 +35,10 @@ struct RecipeCardView: View {
 }
 
 struct RecipeCardView_Previews: PreviewProvider {
+    
+    @State static var recipe: Recipe = Recipe(title: "", description: "", flour: Ingredient(category: .Dough, name: "", amount: 10, percentage: 10), water: Ingredient(category: .Dough, name: "", amount: 10, percentage: 10), salt: Ingredient(category: .Dough, name: "", amount: 10, percentage: 10), levain: Ingredient(category: .Dough, name: "", amount: 10, percentage: 10))
+    
     static var previews: some View {
-        RecipeCardView()
+        RecipeCardView(recipe: $recipe)
     }
 }
