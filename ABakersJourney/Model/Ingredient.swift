@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Category {
+enum Category: String, CaseIterable {
     case Dough
     case Levain
     case Starter
@@ -20,10 +20,10 @@ class Ingredient: Identifiable {
     
     var category: Category
     var name: String
-    var amount: Double
-    var percentage: Double
+    var amount: String
+    var percentage: String
     
-    init(category: Category, name: String, amount: Double, percentage: Double) {
+    init(category: Category = .Dough, name: String = "", amount: String = "", percentage: String = "") {
         self.category = category
         self.name = name
         self.amount = amount

@@ -8,19 +8,21 @@
 
 import Foundation
 import Combine
+import UIKit
 
 class Recipe: Identifiable {
     
     var id = UUID()
     var title: String
     var description: String
+    var coverImage: UIImage = UIImage()
     
     var flour: Ingredient
     var water: Ingredient 
     var salt: Ingredient
     var levain: Ingredient
     
-    init(title: String, description: String, flour: Ingredient, water: Ingredient, salt: Ingredient, levain: Ingredient) {
+    init(title: String = "", description: String = "", flour: Ingredient, water: Ingredient, salt: Ingredient, levain: Ingredient) {
         self.title = title
         self.description = description
         self.flour = flour

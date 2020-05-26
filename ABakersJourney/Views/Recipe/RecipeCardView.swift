@@ -36,7 +36,7 @@ struct RecipeCardView: View {
 
 struct RecipeCardView_Previews: PreviewProvider {
     
-    @State static var recipe: Recipe = Recipe(title: "", description: "", flour: Ingredient(category: .Dough, name: "", amount: 10, percentage: 10), water: Ingredient(category: .Dough, name: "", amount: 10, percentage: 10), salt: Ingredient(category: .Dough, name: "", amount: 10, percentage: 10), levain: Ingredient(category: .Dough, name: "", amount: 10, percentage: 10))
+    @State static var recipe: Recipe = Recipe(title: "", description: "", flour: Ingredient(category: .Dough, name: "", amount: "", percentage: ""), water: Ingredient(category: .Dough, name: "", amount: "", percentage: ""), salt: Ingredient(category: .Dough, name: "", amount: "", percentage: ""), levain: Ingredient(category: .Dough, name: "", amount: "", percentage: ""))
     
     static var previews: some View {
         RecipeCardView(recipe: $recipe)
