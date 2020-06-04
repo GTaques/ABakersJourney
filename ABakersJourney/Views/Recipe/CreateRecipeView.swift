@@ -10,11 +10,13 @@ import SwiftUI
 
 struct CreateRecipeView: View {
     
-    @State var receita: Recipe = Recipe(flour: Ingredient(), water: Ingredient(), salt: Ingredient(), levain: Ingredient())
+    @State var receita: Recipe = Recipe(flour: Ingredient(), water: Ingredient(), salt: Ingredient(), levain: Ingredient(), ingredients: [Ingredient()])
     
-    @State var ingredients: [Ingredient] = [Ingredient(category: .Dough, name: "Farinha", amount: "", percentage: ""), Ingredient(category: .Dough, name: "Água", amount: "", percentage: ""), Ingredient(category: .Dough, name: "Levain", amount: "", percentage: ""), Ingredient(category: .Dough, name: "Sal", amount: "", percentage: "")
-    ]
+    @State var ingredients: [Ingredient] = [Ingredient(category: .Dough, name: "Farinha", amount: "", percentage: "", isFarinha: true), Ingredient(category: .Dough, name: "Água", amount: "", percentage: ""), Ingredient(category: .Dough, name: "Levain", amount: "", percentage: ""), Ingredient(category: .Dough, name: "Sal", amount: "", percentage: "")
+        ]
     @State var showingCreateIngredient: Bool = false
+    
+    @ObservedObject var receitaViewModel: ReceitaViewModel = ReceitaViewModel()
     
     
     var steps: [String] = ["Ativar Fermento", "Autólise", "Adicionar Levain", "Adicionar Sal", "Laminação", "Dobra #1", "Dobra #2", "Dobra #3", "Modelagem"]
@@ -23,18 +25,23 @@ struct CreateRecipeView: View {
         NavigationView {
             GeometryReader { geometry in
                 VStack {
-                    RecipeSummaryView(ingredients: self.$ingredients).frame(width: geometry.size.width, height: geometry.size.height * 0.3)
+                    RecipeSummaryView(receitaViewModel: self.receitaViewModel).frame(width: geometry.size.width, height: geometry.size.height * 0.3)
                     Form {
                         Section(header: Text("Informações Básicas")) {
                             TextField("Nome", text: self.$receita.title)
                             TextField("Descrição", text: self.$receita.description)
                         }
                         Section(header: Text("Ingredientes")) {
+                            Picker("", selection: self.$receitaViewModel.receita.criterion) {
+                                ForEach(Criterion.allCases, id: \.self) { c in
+                                    Text(c.rawValue)
+                                }
+                            }.pickerStyle(SegmentedPickerStyle())
                             List(self.ingredients.indices) { index in
                                 HStack {
                                     Image(systemName: "circle.fill")
                                         .foregroundColor(.red)
-                                    TextField(self.ingredients[index].name, text: self.$ingredients[index].amount)
+                                    TextField(self.receitaViewModel.receita.ingredients[index].name, text: self.$receitaViewModel.receita.ingredients[index].amount)
                                         .keyboardType(.decimalPad)
                                 }
                             }
@@ -65,7 +72,6 @@ struct CreateRecipeView: View {
             })
             .gesture(DragGesture().onChanged{_ in UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)})
         }
-        
     }
 }
 

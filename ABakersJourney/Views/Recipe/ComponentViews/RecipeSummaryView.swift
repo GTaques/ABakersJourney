@@ -7,18 +7,20 @@
 //
 
 import SwiftUI
+import Combine
 
 struct RecipeSummaryView: View {
     
-    @Binding var ingredients: [Ingredient]
+    @ObservedObject var receitaViewModel: ReceitaViewModel
     
     var body: some View {
-        List(ingredients, id: \.id) { ingredient in
+        List(receitaViewModel.receita.ingredients.indices) { index in
             HStack {
-                Text(ingredient.amount.isEmpty ? "" : ingredient.name)
-                Text(ingredient.amount.isEmpty ? "" : "\(ingredient.amount)g")
+                Text(self.receitaViewModel.receita.ingredients[index].amount.isEmpty ? "" : self.receitaViewModel.receita.ingredients[index].name)
+                Text(self.receitaViewModel.receita.ingredients[index].amount.isEmpty ? "" : "\(self.receitaViewModel.receita.ingredients[index].amount)g")
                 Spacer()
-                Text(ingredient.amount.isEmpty ? "" : "100%")
+                Text(self.receitaViewModel.receita.ingredients[index].amount.isEmpty ? "" : "\(self.receitaViewModel.receita.ingredients[index].percentage)%")
+                
             }
             
         }

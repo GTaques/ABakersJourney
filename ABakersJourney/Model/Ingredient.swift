@@ -22,11 +22,13 @@ class Ingredient: Identifiable {
     var name: String
     var amount: String
     var percentage: String
+    var isFarinha: Bool
     
-    init(category: Category = .Dough, name: String = "", amount: String = "", percentage: String = "") {
+    init(category: Category = .Dough, name: String = "", amount: String = "", percentage: String = "", isFarinha: Bool = false) {
         self.category = category
         self.name = name
         self.amount = amount
         self.percentage = percentage
+        self.isFarinha = isFarinha
     }
 }

@@ -14,12 +14,20 @@ struct RecipeCardView: View {
     
     var body: some View {
         ZStack {
-            Rectangle()
-                .foregroundColor(.green)
-                .cornerRadius(20)
+
+            Image("GRID")
+                .resizable()
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+                
+                .overlay(Rectangle().cornerRadius(20).opacity(0.5))
+//                .clipped()
+                
+            
+            
             VStack {
                 Text(recipe.title)
                 .font(Font.title)
+                    .fontWeight(.medium)
                 HStack {
                     HStack {
                         Image(systemName: "timer")
@@ -28,7 +36,7 @@ struct RecipeCardView: View {
                     
                 }
             }
-            
+            .foregroundColor(.white)
         }
        
     }
@@ -36,7 +44,7 @@ struct RecipeCardView: View {
 
 struct RecipeCardView_Previews: PreviewProvider {
     
-    @State static var recipe: Recipe = Recipe(title: "", description: "", flour: Ingredient(category: .Dough, name: "", amount: "", percentage: ""), water: Ingredient(category: .Dough, name: "", amount: "", percentage: ""), salt: Ingredient(category: .Dough, name: "", amount: "", percentage: ""), levain: Ingredient(category: .Dough, name: "", amount: "", percentage: ""))
+    @State static var recipe: Recipe = Recipe(title: "", description: "", flour: Ingredient(category: .Dough, name: "", amount: "", percentage: ""), water: Ingredient(category: .Dough, name: "", amount: "", percentage: ""), salt: Ingredient(category: .Dough, name: "", amount: "", percentage: ""), levain: Ingredient(category: .Dough, name: "", amount: "", percentage: ""), ingredients: [Ingredient()])
     
     static var previews: some View {
         RecipeCardView(recipe: $recipe)
