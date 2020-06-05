@@ -18,8 +18,8 @@ struct ContentView: View {
             }
             CreateRecipeView()
                 .tabItem {
-                Image(systemName: "plus.square.fill")
-                Text("Criar Receita")
+                    Image(systemName: "plus.square.fill")
+                    Text("Criar Receita")
             }
         }
         

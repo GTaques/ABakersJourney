@@ -14,7 +14,7 @@ struct RecipeSummaryView: View {
     @ObservedObject var receitaViewModel: ReceitaViewModel
     
     var body: some View {
-        List(receitaViewModel.receita.ingredients.indices) { index in
+        List(receitaViewModel.receita.ingredients.indices, id: \.self) { index in
             HStack {
                 Text(self.receitaViewModel.receita.ingredients[index].amount.isEmpty ? "" : self.receitaViewModel.receita.ingredients[index].name)
                 Text(self.receitaViewModel.receita.ingredients[index].amount.isEmpty ? "" : "\(self.receitaViewModel.receita.ingredients[index].amount)g")

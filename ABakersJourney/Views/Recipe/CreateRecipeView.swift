@@ -15,6 +15,7 @@ struct CreateRecipeView: View {
     @State var ingredients: [Ingredient] = [Ingredient(category: .Dough, name: "Farinha", amount: "", percentage: "", isFarinha: true), Ingredient(category: .Dough, name: "Água", amount: "", percentage: ""), Ingredient(category: .Dough, name: "Levain", amount: "", percentage: ""), Ingredient(category: .Dough, name: "Sal", amount: "", percentage: "")
         ]
     @State var showingCreateIngredient: Bool = false
+    @State var isEditMode: Bool = true
     
     @ObservedObject var receitaViewModel: ReceitaViewModel = ReceitaViewModel()
     
@@ -37,21 +38,25 @@ struct CreateRecipeView: View {
                                     Text(c.rawValue)
                                 }
                             }.pickerStyle(SegmentedPickerStyle())
-                            List(self.ingredients.indices) { index in
-                                HStack {
-                                    Image(systemName: "circle.fill")
-                                        .foregroundColor(.red)
-                                    TextField(self.receitaViewModel.receita.ingredients[index].name, text: self.$receitaViewModel.receita.ingredients[index].amount)
-                                        .keyboardType(.decimalPad)
+                            List {
+                                ForEach(self.receitaViewModel.receita.ingredients.indices, id: \.self) { index in
+                                    HStack {
+                                        Image(systemName: "circle.fill")
+                                            .foregroundColor(.red)
+                                        TextField(self.receitaViewModel.receita.ingredients[index].name, text: self.$receitaViewModel.receita.ingredients[index].amount)
+                                            .keyboardType(.decimalPad)
+                                    }
                                 }
+                                .onDelete(perform: self.delete)
                             }
+                            
                             Button(action: {
                                 self.showingCreateIngredient.toggle()
                             }) {
                                 Text("Adicionar")
                             }
                             .sheet(isPresented: self.$showingCreateIngredient) {
-                                CreateIngredientView(showingCreateIngredient: self.$showingCreateIngredient, ingredients: self.$ingredients)
+                                CreateIngredientView(showingCreateIngredient: self.$showingCreateIngredient, receitaViewModel: self.receitaViewModel)
                             }
                         }
                         Section(header: Text("Etapas")) {
@@ -66,12 +71,17 @@ struct CreateRecipeView: View {
                 } // end
             }
             .navigationBarTitle("Criar Receita")
-            .navigationBarItems(trailing: Button(action: {
+            .navigationBarItems(leading: EditButton(), trailing: Button(action: {
                 print("Saved!")
             }) { Text("Save")
             })
             .gesture(DragGesture().onChanged{_ in UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)})
+                
         }
+    }
+    
+    func delete(at offsets: IndexSet) {
+        print("delete")
     }
 }
 

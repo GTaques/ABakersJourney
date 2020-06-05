@@ -11,9 +11,7 @@ import SwiftUI
 struct CreateIngredientView: View {
     
     @Binding var showingCreateIngredient: Bool
-    @Binding var ingredients: [Ingredient]
-    
-    @State var isFlour: Bool = false
+    @ObservedObject var receitaViewModel: ReceitaViewModel
     @State var ingredient: Ingredient = Ingredient()
     
     
@@ -21,7 +19,7 @@ struct CreateIngredientView: View {
         NavigationView {
             Form {
                 Section(header: Text("Informações Básicas")) {
-                    Toggle(isOn: $isFlour) {
+                    Toggle(isOn: $ingredient.isFarinha) {
                         Text("É Farinha")
                     }
                     TextField("Nome", text: self.$ingredient.name)
@@ -41,7 +39,7 @@ struct CreateIngredientView: View {
             }) {
                 Text("Cancel")
                 }, trailing: Button(action: {
-                    self.ingredients.append(self.ingredient)
+                    self.receitaViewModel.receita.ingredients.append(self.ingredient)
                     self.showingCreateIngredient.toggle()
                 }) {
                     Text("Save")
@@ -53,9 +51,10 @@ struct CreateIngredientView: View {
 struct CreateIngredientView_Previews: PreviewProvider {
     
     @State static var showingView: Bool = false
-    @State static var ingredients: [Ingredient] = []
+    @State static var ingredient: Ingredient = Ingredient()
+    @State static var receitaVM: ReceitaViewModel = ReceitaViewModel()
     
     static var previews: some View {
-        CreateIngredientView(showingCreateIngredient: $showingView, ingredients: $ingredients)
+        CreateIngredientView(showingCreateIngredient: $showingView, receitaViewModel: receitaVM, ingredient: ingredient)
     }
 }

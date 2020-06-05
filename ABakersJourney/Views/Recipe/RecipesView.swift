@@ -20,12 +20,11 @@ struct RecipesView: View {
         GeometryReader { geometry in
             ScrollView(.horizontal) {
                 HStack(spacing: 10) {
-                    ForEach(self.recipes.indices) { index in
+                    ForEach(self.recipes.indices, id: \.self) { index in
                         RecipeCardView(recipe: self.$recipes[index]).frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.2)
                     }
                 }
             }
-            
         }
     }
 }
