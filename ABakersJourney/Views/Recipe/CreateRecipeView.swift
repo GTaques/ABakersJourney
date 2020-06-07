@@ -23,7 +23,14 @@ struct CreateRecipeView: View {
     var steps: [String] = ["Ativar Fermento", "Autólise", "Adicionar Levain", "Adicionar Sal", "Laminação", "Dobra #1", "Dobra #2", "Dobra #3", "Modelagem"]
     
     var body: some View {
-        NavigationView {
+        
+        let criterion = Binding<Criteria>(get: {
+            return self.receitaViewModel.receita.criterion
+        }, set: {
+            self.receitaViewModel.receita.criterion = $0
+        })
+        
+        return NavigationView {
             GeometryReader { geometry in
                 VStack {
                     RecipeSummaryView(receitaViewModel: self.receitaViewModel).frame(width: geometry.size.width, height: geometry.size.height * 0.3)
@@ -32,33 +39,35 @@ struct CreateRecipeView: View {
                             TextField("Nome", text: self.$receita.title)
                             TextField("Descrição", text: self.$receita.description)
                         }
-                        Section(header: Text("Ingredientes")) {
-                            Picker("", selection: self.$receitaViewModel.receita.criterion) {
-                                ForEach(Criterion.allCases, id: \.self) { c in
-                                    Text(c.rawValue)
-                                }
-                            }.pickerStyle(SegmentedPickerStyle())
-                            List {
-                                ForEach(self.receitaViewModel.receita.ingredients.indices, id: \.self) { index in
-                                    HStack {
-                                        Image(systemName: "circle.fill")
-                                            .foregroundColor(.red)
-                                        TextField(self.receitaViewModel.receita.ingredients[index].name, text: self.$receitaViewModel.receita.ingredients[index].amount)
-                                            .keyboardType(.decimalPad)
-                                    }
-                                }
-                                .onDelete(perform: self.delete)
-                            }
-                            
-                            Button(action: {
-                                self.showingCreateIngredient.toggle()
-                            }) {
-                                Text("Adicionar")
-                            }
-                            .sheet(isPresented: self.$showingCreateIngredient) {
-                                CreateIngredientView(showingCreateIngredient: self.$showingCreateIngredient, receitaViewModel: self.receitaViewModel)
-                            }
-                        }
+                        RecipeIngredientsFormView(receitaViewModel: self.receitaViewModel, showingCreateIngredient: self.showingCreateIngredient)
+//                        Section(header: Text("Ingredientes")) {
+//                            Picker("", selection: criterion) {
+//                                ForEach(Criteria.allCases, id: \.self) { c in
+//                                    Text(c.rawValue).tag(c.rawValue)
+//                                }
+//                            }
+//                            .pickerStyle(SegmentedPickerStyle())
+//                            List {
+//                                ForEach(self.receitaViewModel.receita.ingredients.indices, id: \.self) { index in
+//                                    HStack {
+//                                        Image(systemName: "circle.fill")
+//                                            .foregroundColor(.red)
+//                                        TextField(self.receitaViewModel.receita.ingredients[index].name, text: self.$receitaViewModel.receita.ingredients[index].amount)
+//                                            .keyboardType(.decimalPad)
+//                                    }
+//                                }
+//                                .onDelete(perform: self.delete)
+//                            }
+//
+//                            Button(action: {
+//                                self.showingCreateIngredient.toggle()
+//                            }) {
+//                                Text("Adicionar")
+//                            }
+//                            .sheet(isPresented: self.$showingCreateIngredient) {
+//                                CreateIngredientView(showingCreateIngredient: self.$showingCreateIngredient, receitaViewModel: self.receitaViewModel)
+//                            }
+//                        }
                         Section(header: Text("Etapas")) {
                             List(self.steps, id: \.self) { step in
                                 HStack {
@@ -72,7 +81,7 @@ struct CreateRecipeView: View {
             }
             .navigationBarTitle("Criar Receita")
             .navigationBarItems(leading: EditButton(), trailing: Button(action: {
-                print("Saved!")
+                print("Saved")
             }) { Text("Save")
             })
             .gesture(DragGesture().onChanged{_ in UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)})

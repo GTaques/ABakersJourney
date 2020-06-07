@@ -40,6 +40,7 @@ struct CreateIngredientView: View {
                 Text("Cancel")
                 }, trailing: Button(action: {
                     self.receitaViewModel.receita.ingredients.append(self.ingredient)
+                    self.receitaViewModel.receita = self.receitaViewModel.receita
                     self.showingCreateIngredient.toggle()
                 }) {
                     Text("Save")

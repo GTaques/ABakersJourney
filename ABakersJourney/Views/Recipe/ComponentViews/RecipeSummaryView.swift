@@ -23,6 +23,8 @@ struct RecipeSummaryView: View {
                 
             }
             
+        }.onAppear {
+            UITableView.appearance().separatorStyle = .none
         }
         
     }
