@@ -12,7 +12,7 @@ struct RecipeIngredientsFormView: View {
     
     @ObservedObject var receitaViewModel: ReceitaViewModel
     
-    @State var gramsShowing: Bool = true
+    @Binding var criterion: Criteria
     @State var showingCreateIngredient: Bool = false
     
     var body: some View {
@@ -21,7 +21,7 @@ struct RecipeIngredientsFormView: View {
             
         }, set: {
             self.receitaViewModel.receita.criterion = $0
-            self.gramsShowing.toggle()
+            self.criterion = $0
         })
         
         return Section(header: Text("Ingredients")) {
@@ -32,7 +32,7 @@ struct RecipeIngredientsFormView: View {
                 }
             }
             .pickerStyle(SegmentedPickerStyle())
-            if gramsShowing {
+            if self.receitaViewModel.receita.criterion == .grams {
                 List {
                     ForEach(1..<self.receitaViewModel.receita.ingredients.indices.last! + 1, id: \.self) { i in
                         TextField(self.receitaViewModel.receita.ingredients[i].name, text: self.$receitaViewModel.receita.ingredients[i].amount).keyboardType(.decimalPad)
@@ -61,8 +61,9 @@ struct RecipeIngredientsFormView: View {
 struct RecipeIngredientsFormView_Previews: PreviewProvider {
     
     @State static var receitaVM: ReceitaViewModel = ReceitaViewModel()
+    @State static var criterion: Criteria = .grams
     
     static var previews: some View {
-        RecipeIngredientsFormView(receitaViewModel: receitaVM)
+        RecipeIngredientsFormView(receitaViewModel: receitaVM, criterion: $criterion)
     }
 }

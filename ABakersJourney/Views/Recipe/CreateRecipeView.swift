@@ -32,7 +32,7 @@ struct CreateRecipeView: View {
                             TextField("Nome", text: self.$receita.title)
                             TextField("Descrição", text: self.$receita.description)
                         }
-                        RecipeIngredientsFormView(receitaViewModel: self.receitaViewModel, showingCreateIngredient: self.showingCreateIngredient)
+                        RecipeIngredientsFormView(receitaViewModel: self.receitaViewModel, criterion: self.$receitaViewModel.receita.criterion, showingCreateIngredient: self.showingCreateIngredient)
 //                        Section(header: Text("Ingredientes")) {
 //                            Picker("", selection: criterion) {
 //                                ForEach(Criteria.allCases, id: \.self) { c in
@@ -70,7 +70,7 @@ struct CreateRecipeView: View {
                             }
                         }
                     }.frame(width: geometry.size.width, height: geometry.size.height * 0.7)
-                } // end
+                }
             }
             .navigationBarTitle("Criar Receita")
             .navigationBarItems(leading: EditButton(), trailing: Button(action: {

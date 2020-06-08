@@ -48,7 +48,6 @@ struct CreateIngredientView: View {
                             Text($0.rawValue)
                         }
                     }
-                    
                 }
             }
             .navigationBarTitle("Ingrediente", displayMode: .inline)
@@ -64,6 +63,10 @@ struct CreateIngredientView: View {
                     Text("Save")
             })
         }
+    }
+    
+    func delete(at offsets: IndexSet) {
+        print("delete")
     }
 }
 

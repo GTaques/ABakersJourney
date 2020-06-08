@@ -47,23 +47,27 @@ class Recipe: Identifiable {
                 self.totalAmountOfFlour += Double(ing.amount)!
             }
         }
-        for ing in ingredients.filter({!$0.amount.isEmpty || !$0.percentage.isEmpty}) {
-            switch criterion {
-            case .grams:
-                if !ing.amount.isEmpty {
-                    ing.percentage = String(format: "%.1f", Double(ing.amount)! * 100 / self.totalAmountOfFlour)
-                    break
-                } else {
-                    ing.amount = String(format: "%.0f", Double(ing.percentage)! * self.totalAmountOfFlour / 100)
-                }
-            case .percentage:
-                if !ing.percentage.isEmpty {
-                    ing.amount = String(format: "%.0f", Double(ing.percentage)! * self.totalAmountOfFlour / 100)
-                    break
+        switch criterion {
+        case .grams:
+            // CHECK-LATER: Used filter before but I couldn't seem to find a fix for when the value is empty. Summary would not update
+            // for ing in ingredients.filter({!$0.amount.isEmpty}) {}
+            for ing in ingredients {
+                if ing.amount.isEmpty {
+                    ing.percentage = ""
                 } else {
                     ing.percentage = String(format: "%.1f", Double(ing.amount)! * 100 / self.totalAmountOfFlour)
                 }
             }
+            break
+        case .percentage:
+            for ing in ingredients {
+                if ing.percentage.isEmpty {
+                    ing.amount = ""
+                } else {
+                    ing.amount = String(format: "%.0f", Double(ing.percentage)! * self.totalAmountOfFlour / 100)
+                }
+            }
+            break
         }
     }
     
