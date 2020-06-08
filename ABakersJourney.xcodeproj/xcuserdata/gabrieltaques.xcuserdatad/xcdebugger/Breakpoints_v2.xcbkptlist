@@ -46,8 +46,8 @@
             filePath = "ABakersJourney/Views/Ingredient/CreateIngredientView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -62,8 +62,8 @@
             filePath = "ABakersJourney/Views/Recipe/CreateRecipeView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -71,129 +71,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "68A1A825-5012-44A8-AA1F-DCAED821D343"
-            shouldBeEnabled = "No"
+            uuid = "187F15AF-CDAE-417F-A3DF-D828D25FA958"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ABakersJourney/Models/Recipe.swift"
+            filePath = "ABakersJourney/Views/Ingredient/CreateIngredientView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "calculatePercentages(criterion:)"
-            landmarkType = "7">
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "body"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "976B3617-1EEE-4F70-87A3-DEB0E2CB598B"
-            shouldBeEnabled = "No"
+            uuid = "046FB0A5-0FBC-44B0-8CB0-63FA654690BA"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ABakersJourney/Models/Recipe.swift"
+            filePath = "ABakersJourney/Views/Ingredient/CreateIngredientView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "calculatePercentages(criterion:)"
-            landmarkType = "7">
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "body"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6FC0B8F9-FD1C-4E23-92CE-9B8B8F509306"
-            shouldBeEnabled = "No"
+            uuid = "1DDA7C73-9DB5-4D4E-AA84-4BAAF709EC6B"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ABakersJourney/Models/Recipe.swift"
+            filePath = "ABakersJourney/Views/Ingredient/CreateIngredientView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "calculatePercentages(criterion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "6FC0B8F9-FD1C-4E23-92CE-9B8B8F509306 - 96db9855c6390f79"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ABakersJourney.Recipe.calculatePercentages(criterion: ABakersJourney.Criteria) -&gt; ()"
-                  moduleName = "ABakersJourney"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gabrieltaques/Documents/Development/Swift/ABakersJourney/ABakersJourney/Models/Recipe.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "50"
-                  endingLineNumber = "50"
-                  offsetFromSymbolStart = "1064">
-               </Location>
-               <Location
-                  uuid = "6FC0B8F9-FD1C-4E23-92CE-9B8B8F509306 - c249fd797e6faf12"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (ABakersJourney.Ingredient) -&gt; Swift.Bool in ABakersJourney.Recipe.calculatePercentages(criterion: ABakersJourney.Criteria) -&gt; ()"
-                  moduleName = "ABakersJourney"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gabrieltaques/Documents/Development/Swift/ABakersJourney/ABakersJourney/Models/Recipe.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "50"
-                  endingLineNumber = "50"
-                  offsetFromSymbolStart = "52">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "3057D1D4-6100-4ED3-8788-A4CDEFDCB7DE"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ABakersJourney/Models/Recipe.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "calculatePercentages(criterion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "A17A6DE3-C727-45D9-945E-21CF3A75EC67"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ABakersJourney/Models/Recipe.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "calculatePercentages(criterion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7DCF8FDC-4649-47C0-BB0C-971C54AD02B4"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ABakersJourney/Models/Recipe.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
-            landmarkName = "calculatePercentages(criterion:)"
-            landmarkType = "7">
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "body"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

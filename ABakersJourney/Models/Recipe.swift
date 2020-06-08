@@ -50,28 +50,21 @@ class Recipe: Identifiable {
         for ing in ingredients.filter({!$0.amount.isEmpty || !$0.percentage.isEmpty}) {
             switch criterion {
             case .grams:
-//                for ing in ingredients.filter({!$0.amount.isEmpty}) {
+                if !ing.amount.isEmpty {
                     ing.percentage = String(format: "%.1f", Double(ing.amount)! * 100 / self.totalAmountOfFlour)
-//                }
-            case .percentage:
-//                for ing in ingredients.filter({!$0.percentage.isEmpty}) {
+                    break
+                } else {
                     ing.amount = String(format: "%.0f", Double(ing.percentage)! * self.totalAmountOfFlour / 100)
-                    print("Quantidade de \(ing.name):  \(ing.amount)")
-                    print("Porcentagem de \(ing.name):  \(ing.percentage)")
-
-//                }
+                }
+            case .percentage:
+                if !ing.percentage.isEmpty {
+                    ing.amount = String(format: "%.0f", Double(ing.percentage)! * self.totalAmountOfFlour / 100)
+                    break
+                } else {
+                    ing.percentage = String(format: "%.1f", Double(ing.amount)! * 100 / self.totalAmountOfFlour)
+                }
             }
-//            if !ing.percentage.isEmpty  {
-//                ing.amount = String(format: "%.0f", Double(ing.percentage)! * self.totalAmountOfFlour / 100)
-//            } else {
-//                ing.percentage = String(format: "%.1f", Double(ing.amount)! * 100 / self.totalAmountOfFlour)
-//            }
         }
-        
-        
-
-        
-        
     }
     
 }

@@ -52,7 +52,7 @@ struct RecipeIngredientsFormView: View {
                 Text("Adicionar")
             }
             .sheet(isPresented: self.$showingCreateIngredient) {
-                CreateIngredientView(showingCreateIngredient: self.$showingCreateIngredient, receitaViewModel: self.receitaViewModel)
+                CreateIngredientView(receitaViewModel: self.receitaViewModel, showingCreateIngredient: self.$showingCreateIngredient, criterion: self.$receitaViewModel.receita.criterion)
             }
         }
     }

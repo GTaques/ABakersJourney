@@ -23,14 +23,7 @@ struct CreateRecipeView: View {
     var steps: [String] = ["Ativar Fermento", "Autólise", "Adicionar Levain", "Adicionar Sal", "Laminação", "Dobra #1", "Dobra #2", "Dobra #3", "Modelagem"]
     
     var body: some View {
-        
-        let criterion = Binding<Criteria>(get: {
-            return self.receitaViewModel.receita.criterion
-        }, set: {
-            self.receitaViewModel.receita.criterion = $0
-        })
-        
-        return NavigationView {
+        NavigationView {
             GeometryReader { geometry in
                 VStack {
                     RecipeSummaryView(receitaViewModel: self.receitaViewModel).frame(width: geometry.size.width, height: geometry.size.height * 0.3)
