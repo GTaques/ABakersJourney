@@ -11,23 +11,24 @@ import SwiftUI
 struct RecipeCardView: View {
     
     @Binding var recipe: Recipe
+    var width: CGFloat
+    var height: CGFloat
     
     var body: some View {
         ZStack {
 
-            Image("GRID")
+            Image(recipe.imageName)
                 .resizable()
-                .clipShape(RoundedRectangle(cornerRadius: 20))
+                .scaledToFill()
+                .frame(width: width, height: height)
+                .overlay(Rectangle().cornerRadius(8).foregroundColor(.black).opacity(0.5))
+                .clipShape(RoundedRectangle(cornerRadius: 8))
                 
-                .overlay(Rectangle().cornerRadius(20).opacity(0.5))
-//                .clipped()
                 
-            
-            
-            VStack {
+            VStack(alignment: .leading) {
                 Text(recipe.title)
                 .font(Font.title)
-                    .fontWeight(.medium)
+                    .fontWeight(.medium).foregroundColor(.white)
                 HStack {
                     HStack {
                         Image(systemName: "timer")
@@ -45,8 +46,11 @@ struct RecipeCardView: View {
 struct RecipeCardView_Previews: PreviewProvider {
     
     @State static var recipe: Recipe = Recipe(title: "", description: "", flour: Ingredient(category: .Dough, name: "", amount: "", percentage: ""), water: Ingredient(category: .Dough, name: "", amount: "", percentage: ""), salt: Ingredient(category: .Dough, name: "", amount: "", percentage: ""), levain: Ingredient(category: .Dough, name: "", amount: "", percentage: ""), ingredients: [Ingredient()])
+    @State static var width: CGFloat = 40
+    @State static var height: CGFloat = 60
+    
     
     static var previews: some View {
-        RecipeCardView(recipe: $recipe)
+        RecipeCardView(recipe: $recipe, width: width, height: height)
     }
 }

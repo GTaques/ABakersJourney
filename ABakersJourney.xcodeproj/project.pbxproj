@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		290AA673248D6278005CCA12 /* BindingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290AA672248D6278005CCA12 /* BindingExtension.swift */; };
 		290AA675248D6597005CCA12 /* RecipeIngredientsFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290AA674248D6597005CCA12 /* RecipeIngredientsFormView.swift */; };
+		290AA677248EEB52005CCA12 /* ReceitasViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290AA676248EEB51005CCA12 /* ReceitasViewModel.swift */; };
 		2913F425247C85CD00F377BF /* CreateIngredientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2913F424247C85CD00F377BF /* CreateIngredientView.swift */; };
 		2913F427247C91B800F377BF /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2913F426247C91B800F377BF /* Shared.swift */; };
 		2913F429247C9B1500F377BF /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2913F428247C9B1500F377BF /* ImageHelper.swift */; };
@@ -33,6 +34,7 @@
 /* Begin PBXFileReference section */
 		290AA672248D6278005CCA12 /* BindingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingExtension.swift; sourceTree = "<group>"; };
 		290AA674248D6597005CCA12 /* RecipeIngredientsFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeIngredientsFormView.swift; sourceTree = "<group>"; };
+		290AA676248EEB51005CCA12 /* ReceitasViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceitasViewModel.swift; sourceTree = "<group>"; };
 		2913F424247C85CD00F377BF /* CreateIngredientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIngredientView.swift; sourceTree = "<group>"; };
 		2913F426247C91B800F377BF /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
 		2913F428247C9B1500F377BF /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				29DF476C2485483700691AC4 /* ReceitaViewModel.swift */,
+				290AA676248EEB51005CCA12 /* ReceitasViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				291E7EBF2472D0CB0024502D /* SceneDelegate.swift in Sources */,
 				29D4AC562489CF0300D6BCC3 /* BakersMathView.swift in Sources */,
 				29217281248C513000BABEEA /* Criteria.swift in Sources */,
+				290AA677248EEB52005CCA12 /* ReceitasViewModel.swift in Sources */,
 				2913F427247C91B800F377BF /* Shared.swift in Sources */,
 				291E7EC12472D0CB0024502D /* ContentView.swift in Sources */,
 				2913F429247C9B1500F377BF /* ImageHelper.swift in Sources */,

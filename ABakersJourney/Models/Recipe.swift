@@ -24,13 +24,14 @@ class Recipe: Identifiable {
     var ingredients: [Ingredient]
     var totalAmountOfFlour: Double = 0
     var criterion: Criteria = .grams
+    var imageName: String
     
     init(title: String = "", description: String = "", flour: Ingredient, water: Ingredient, salt: Ingredient, levain: Ingredient, ingredients: [Ingredient] = [
             Ingredient(category: .Dough, name: "Farinha", amount: "", percentage: "", isFarinha: true),
             Ingredient(category: .Dough, name: "Água", amount: "", percentage: ""),
             Ingredient(category: .Dough, name: "Levain", amount: "", percentage: ""),
             Ingredient(category: .Dough, name: "Sal", amount: "", percentage: "")
-    ]) {
+        ], imageName: String = "") {
         self.title = title
         self.description = description
         self.flour = flour
@@ -38,6 +39,7 @@ class Recipe: Identifiable {
         self.salt = salt
         self.levain = levain
         self.ingredients = ingredients
+        self.imageName = imageName
     }
     
     func calculatePercentages(criterion: Criteria) {

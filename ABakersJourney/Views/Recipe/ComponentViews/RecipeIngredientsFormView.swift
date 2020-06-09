@@ -25,7 +25,7 @@ struct RecipeIngredientsFormView: View {
         })
         
         return Section(header: Text("Ingredients")) {
-            TextField("Farinha", text: $receitaViewModel.receita.ingredients[0].amount).keyboardType(.decimalPad)
+            TextField("Total de Farinha", text: $receitaViewModel.receita.ingredients[0].amount).keyboardType(.decimalPad)
             Picker("", selection: criterion) {
                 ForEach(Criteria.allCases, id: \.self) { c in
                     Text(c.rawValue).tag(c.rawValue)

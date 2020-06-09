@@ -11,35 +11,83 @@ import Combine
 
 struct RecipesView: View {
     
-    @State private var recipes: [Recipe] = [
-        Recipe(title: "Tartine Country Bread", description: "Bem gostoso", flour: Ingredient(category: .Dough, name: "Farinha", amount: "", percentage: "100"), water: Ingredient(category: .Dough, name: "Água", amount: "", percentage: ""), salt: Ingredient(category: .Dough, name: "Sal", amount: "", percentage: ""), levain: Ingredient(category: .Levain, name: "Levain", amount: "", percentage: ""), ingredients: [Ingredient()]),
-        Recipe(title: "Foccacia", description: "Bem gostoso", flour: Ingredient(category: .Dough, name: "Farinha", amount: "", percentage: ""), water: Ingredient(category: .Dough, name: "Água", amount: "", percentage: ""), salt: Ingredient(category: .Dough, name: "Sal", amount: "", percentage: ""), levain: Ingredient(category: .Levain, name: "Levain", amount: "", percentage: ""), ingredients: [Ingredient()]),
-        Recipe(title: "Foccacia", description: "Bem gostoso", flour: Ingredient(category: .Dough, name: "Farinha", amount: "", percentage: ""), water: Ingredient(category: .Dough, name: "Água", amount: "", percentage: ""), salt: Ingredient(category: .Dough, name: "Sal", amount: "", percentage: ""), levain: Ingredient(category: .Levain, name: "Levain", amount: "", percentage: ""), ingredients: [Ingredient()])
-    ]
+    @State var receitasViewModel: ReceitasViewModel = ReceitasViewModel()
     
     var body: some View {
         GeometryReader { geometry in
-            VStack {
-                Text("Hello Gabriel").font(.title)
-                List {
-                    ForEach(RecipeCategories.allCases, id: \.self) { rc in
-                        VStack(alignment: .leading) {
-                            Text(rc.rawValue).bold().font(.title)
-                            ScrollView(.horizontal) {
-                                HStack(spacing: 10) {
-                                    ForEach(self.recipes.indices, id: \.self) { index in
-                                        RecipeCardView(recipe: self.$recipes[index]).frame(width: geometry.size.width * 0.4, height: geometry.size.width * 0.35)
-                                    }
+            ScrollView(.vertical) {
+                VStack(alignment: .leading) {
+                    Text("Hello Gabriel").font(.title).padding(EdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 0))
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text("Newest").bold().font(.title)
+                            Spacer()
+                            Button(action: {
+                                print("Ver todos")
+                            }) {
+                                Text("Ver Mais")
+                            }
+                        }.padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 15))
+                        ScrollView(.horizontal) {
+                            HStack {
+                                ForEach(self.receitasViewModel.receitas.indices, id: \.self) { index in
+                                    RecipeCardView(recipe: self.$receitasViewModel.receitas[index], width: geometry.size.width * 0.38, height: geometry.size.width * 0.32).frame(width: geometry.size.width * 0.38, height: geometry.size.width * 0.32)
                                 }
                             }
-                        }.listRowInsets(EdgeInsets(top: 10, leading: 20, bottom: 20, trailing: 0))
-                    }
-                }.onAppear {
-                    UITableView.appearance().separatorStyle = .none
+                        }
+                        
+                    }.padding(EdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 0))
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text("Popular").bold().font(.title)
+                            Spacer()
+                            Button(action: {
+                                print("Ver todos")
+                            }) {
+                                Text("Ver Mais")
+                            }
+                        }.padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 15))
+                        ScrollView(.horizontal) {
+                            HStack {
+                                ForEach(self.receitasViewModel.receitas.indices, id: \.self) { index in
+                                    VStack(alignment: .leading) {
+                                        RecipeCardView(recipe: self.$receitasViewModel.receitas[index], width: geometry.size.width * 0.38, height: geometry.size.width * 0.4).frame(width: geometry.size.width * 0.38, height: geometry.size.width * 0.4)
+                                        Text("Mixed Flours").bold()
+                                        Text("by: Author Name")
+                                    }
+                                    
+                                }
+                            }
+                        }
+                        
+                    }.padding(EdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 0))
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text("Last Made by You").bold().font(.title)
+                            Spacer()
+                            Button(action: {
+                                print("Ver todos")
+                            }) {
+                                Text("Ver Mais")
+                            }
+                        }.padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 15))
+                        ScrollView(.horizontal) {
+                            HStack {
+                                ForEach(self.receitasViewModel.receitas.indices, id: \.self) { index in
+                                    VStack(alignment: .leading) {
+                                        RecipeCardView(recipe: self.$receitasViewModel.receitas[index], width: geometry.size.width * 0.38, height: geometry.size.width * 0.46).frame(width: geometry.size.width * 0.38, height: geometry.size.width * 0.46)
+                                        Text("Mixed Flours").bold()
+                                        Text("by: Author Name")
+                                    }
+                                    
+                                }
+                            }
+                        }
+                        
+                    }.padding(EdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 0))
                 }
             }
         }
-        
     }
 }
 
