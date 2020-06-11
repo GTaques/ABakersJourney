@@ -9,40 +9,73 @@
 import Foundation
 import Combine
 import UIKit
+import CloudKit
 
 class Recipe: Identifiable {
     
-    var id = UUID()
+    static let recordType = "Recipe"
+    let id = UUID()
+    private var recordId: CKRecord.ID?
     var title: String
-    var description: String
-    var category: RecipeCategory = .bread
-    var coverImage: UIImage = UIImage()
+    var description: String?
+    var database: CKDatabase?
+    var category: RecipeCategory
+    var coverImage: CKAsset?
+    var totalAmountOfFlour: Double
+    var criterion: Criteria
+    var imageName: String?
+    var scope: Scope
     
-    var flour: Ingredient 
-    var water: Ingredient 
-    var salt: Ingredient
-    var levain: Ingredient
-    var ingredients: [Ingredient]
-    var totalAmountOfFlour: Double = 0
-    var criterion: Criteria = .grams
-    var imageName: String
-    var scope: Scope = .new
+//    var flour: Ingredient 
+//    var water: Ingredient 
+//    var salt: Ingredient
+//    var levain: Ingredient
+    var ingredients: [Ingredient] = []
     
     
-    init(title: String = "", description: String = "", flour: Ingredient, water: Ingredient, salt: Ingredient, levain: Ingredient, ingredients: [Ingredient] = [
-            Ingredient(category: .Dough, name: "Farinha", amount: "", percentage: "", isFarinha: true),
-            Ingredient(category: .Dough, name: "Água", amount: "", percentage: ""),
-            Ingredient(category: .Dough, name: "Levain", amount: "", percentage: ""),
-            Ingredient(category: .Dough, name: "Sal", amount: "", percentage: "")
-        ], imageName: String = "") {
+    init(title: String, category: RecipeCategory, totalAmoountOfFlour: Double, criterion: Criteria, scope: Scope, ingredients: [Ingredient] = [Ingredient(category: .Dough, name: "", amount: "", percentage: "", isFarinha: true)]) {
         self.title = title
-        self.description = description
-        self.flour = flour
-        self.water = water
-        self.salt = salt
-        self.levain = levain
+        self.category = category
+        self.totalAmountOfFlour = totalAmoountOfFlour
+        self.criterion = criterion
+        self.scope = scope
         self.ingredients = ingredients
-        self.imageName = imageName
+    }
+    
+    init?(record: CKRecord, database: CKDatabase) {
+        guard let title = record["title"] as? String else { return nil }
+        
+        recordId = record.recordID
+        self.title = title
+        self.description = record["description"]
+        self.database = database
+        if let categoryValue = record["category"] as? Int,
+            let category = RecipeCategory(rawValue: categoryValue) {
+            self.category = category
+        } else {
+            self.category = .none
+        }
+        self.coverImage = record["coverImage"] as? CKAsset
+        if let totalAmountOfFlour = record["totalAmountOfFlour"] as? Double {
+            self.totalAmountOfFlour = totalAmountOfFlour
+        } else {
+            self.totalAmountOfFlour = 0
+        }
+        if let criterionValue = record["criterion"] as? String,
+            let criterion = Criteria(rawValue: criterionValue) {
+            self.criterion = criterion
+        } else {
+            self.criterion = .none
+        }
+        self.imageName = record["imageName"]
+        if let scopeValue = record["scope"] as? Int,
+            let scope = Scope(rawValue: scopeValue) {
+            self.scope = scope
+        } else {
+            self.scope = .new
+        }
+        
+        
     }
     
     func calculatePercentages(criterion: Criteria) {
@@ -72,6 +105,8 @@ class Recipe: Identifiable {
                     ing.amount = String(format: "%.0f", Double(ing.percentage)! * self.totalAmountOfFlour / 100)
                 }
             }
+            break
+        default:
             break
         }
     }

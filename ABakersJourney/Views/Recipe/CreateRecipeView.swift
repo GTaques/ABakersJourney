@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CreateRecipeView: View {
     
-    @State var receita: Recipe = Recipe(flour: Ingredient(), water: Ingredient(), salt: Ingredient(), levain: Ingredient(), ingredients: [Ingredient()])
+//    @State var receita: Recipe = Recipe(flour: Ingredient(), water: Ingredient(), salt: Ingredient(), levain: Ingredient(), ingredients: [Ingredient()])
     
     @State var ingredients: [Ingredient] = [Ingredient(category: .Dough, name: "Farinha", amount: "", percentage: "", isFarinha: true), Ingredient(category: .Dough, name: "Água", amount: "", percentage: ""), Ingredient(category: .Dough, name: "Levain", amount: "", percentage: ""), Ingredient(category: .Dough, name: "Sal", amount: "", percentage: "")
         ]
@@ -28,10 +28,10 @@ struct CreateRecipeView: View {
                 VStack {
                     RecipeSummaryView(receitaViewModel: self.receitaViewModel).frame(width: geometry.size.width, height: geometry.size.height * 0.3)
                     Form {
-                        Section(header: Text("Informações Básicas")) {
-                            TextField("Nome", text: self.$receita.title)
-                            TextField("Descrição", text: self.$receita.description)
-                        }
+//                        Section(header: Text("Informações Básicas")) {
+//                            TextField("Nome", text: self.$receitaViewModel.receita.title)
+//                            TextField("Descrição", text: self.$receitaViewModel.receita.description)
+//                        }
                         RecipeIngredientsFormView(receitaViewModel: self.receitaViewModel, criterion: self.$receitaViewModel.receita.criterion, showingCreateIngredient: self.showingCreateIngredient)
 //                        Section(header: Text("Ingredientes")) {
 //                            Picker("", selection: criterion) {

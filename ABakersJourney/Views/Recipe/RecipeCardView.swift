@@ -17,7 +17,7 @@ struct RecipeCardView: View {
     var body: some View {
         ZStack {
 
-            Image(recipe.imageName)
+            Image(recipe.imageName ?? "pao1")
                 .resizable()
                 .scaledToFill()
                 .frame(width: width, height: height)
@@ -45,7 +45,7 @@ struct RecipeCardView: View {
 
 struct RecipeCardView_Previews: PreviewProvider {
     
-    @State static var recipe: Recipe = Recipe(title: "", description: "", flour: Ingredient(category: .Dough, name: "", amount: "", percentage: ""), water: Ingredient(category: .Dough, name: "", amount: "", percentage: ""), salt: Ingredient(category: .Dough, name: "", amount: "", percentage: ""), levain: Ingredient(category: .Dough, name: "", amount: "", percentage: ""), ingredients: [Ingredient()])
+    @State static var recipe: Recipe = Recipe(title: "", category: .bread, totalAmoountOfFlour: 0, criterion: .grams, scope: .new)
     @State static var width: CGFloat = 40
     @State static var height: CGFloat = 60
     

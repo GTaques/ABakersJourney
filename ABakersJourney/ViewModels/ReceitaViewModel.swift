@@ -10,20 +10,17 @@ import SwiftUI
 import Combine
 
 class ReceitaViewModel: ObservableObject {
-    @Published var receita: Recipe  {
+    @Published var receita: Recipe {
         didSet {
             receita.calculatePercentages(criterion: self.receita.criterion)
         }
     }
+    
     init() {
-        self.receita = Recipe(title: "", description: "", flour: Ingredient(), water: Ingredient(), salt: Ingredient(), levain: Ingredient(), ingredients: [
-                Ingredient(category: .Dough, name: "Farinha", amount: "", percentage: "", isFarinha: true),
-                Ingredient(category: .Dough, name: "Água", amount: "", percentage: ""),
-                Ingredient(category: .Dough, name: "Levain", amount: "", percentage: ""),
-                Ingredient(category: .Dough, name: "Sal", amount: "", percentage: "")
-        ])
-        
+        self.receita = Recipe(title: "", category: .bread, totalAmoountOfFlour: 0, criterion: .grams, scope: .new)
     }
+    
+    
 }
 
 

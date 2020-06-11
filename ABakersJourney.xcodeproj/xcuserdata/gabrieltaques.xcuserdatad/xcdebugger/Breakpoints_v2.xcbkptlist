@@ -84,5 +84,133 @@
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C768F9B4-E2DA-43CF-9B98-8377B15F1AB8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ABakersJourney/ViewModels/ReceitasViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "recipes(forQuery:_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C768F9B4-E2DA-43CF-9B98-8377B15F1AB8 - 1c4385f6e3a4a7db"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ABakersJourney.ReceitasViewModel.(recipes in _40B4EDCC46BC13656E55E881C5D44847)(forQuery: __C.CKQuery, _: (Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "ABakersJourney"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gabrieltaques/Documents/Development/Swift/ABakersJourney/ABakersJourney/ViewModels/ReceitasViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "148">
+               </Location>
+               <Location
+                  uuid = "C768F9B4-E2DA-43CF-9B98-8377B15F1AB8 - ccbfe9d954d3bdc3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Array&lt;__C.CKRecord&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in ABakersJourney.ReceitasViewModel.(recipes in _40B4EDCC46BC13656E55E881C5D44847)(forQuery: __C.CKQuery, _: (Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "ABakersJourney"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gabrieltaques/Documents/Development/Swift/ABakersJourney/ABakersJourney/ViewModels/ReceitasViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "348">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "618186F0-43CE-417C-BCCF-3CB03C766B3C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ABakersJourney/ViewModels/ReceitasViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "refresh(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1709AEFA-1711-49F7-A16C-1F227CC05F70"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ABakersJourney/ViewModels/ReceitasViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "recipes(forQuery:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F1BD60D0-D048-472E-904E-C2EFA149A60D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ABakersJourney/ViewModels/ReceitasViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "recipes(forQuery:_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F1BD60D0-D048-472E-904E-C2EFA149A60D - ccbfe9d954d3bdc3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Array&lt;__C.CKRecord&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in ABakersJourney.ReceitasViewModel.(recipes in _40B4EDCC46BC13656E55E881C5D44847)(forQuery: __C.CKQuery, _: (Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "ABakersJourney"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gabrieltaques/Documents/Development/Swift/ABakersJourney/ABakersJourney/ViewModels/ReceitasViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
+                  offsetFromSymbolStart = "1124">
+               </Location>
+               <Location
+                  uuid = "F1BD60D0-D048-472E-904E-C2EFA149A60D - a67dfa5751f3f45d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (__C.CKRecord) -&gt; Swift.Optional&lt;ABakersJourney.Recipe&gt; in closure #1 (Swift.Optional&lt;Swift.Array&lt;__C.CKRecord&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in ABakersJourney.ReceitasViewModel.(recipes in _40B4EDCC46BC13656E55E881C5D44847)(forQuery: __C.CKQuery, _: (Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "ABakersJourney"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gabrieltaques/Documents/Development/Swift/ABakersJourney/ABakersJourney/ViewModels/ReceitasViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "108">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

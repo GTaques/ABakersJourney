@@ -8,7 +8,8 @@
 
 import Foundation
 
-enum RecipeCategory {
+enum RecipeCategory: Int {
     case bread
     case focaccia
+    case none
 }

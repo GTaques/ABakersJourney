@@ -87,8 +87,17 @@ struct RecipesView: View {
                     }.padding(EdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 0))
                 }
             }
+        }.onAppear(perform: loadRecipes)
+    }
+    
+    func loadRecipes() {
+        self.receitasViewModel.refresh { error in
+            if let error = error {
+                print("Erro ao carregar receitas")
+            }
         }
     }
+    
 }
 
 struct RecipesView_Previews: PreviewProvider {

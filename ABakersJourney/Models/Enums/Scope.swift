@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Scope {
+enum Scope: Int {
     case today
     case popular
     case new
