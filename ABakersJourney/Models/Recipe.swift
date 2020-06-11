@@ -15,6 +15,7 @@ class Recipe: Identifiable {
     var id = UUID()
     var title: String
     var description: String
+    var category: RecipeCategory = .bread
     var coverImage: UIImage = UIImage()
     
     var flour: Ingredient 
@@ -25,6 +26,8 @@ class Recipe: Identifiable {
     var totalAmountOfFlour: Double = 0
     var criterion: Criteria = .grams
     var imageName: String
+    var scope: Scope = .new
+    
     
     init(title: String = "", description: String = "", flour: Ingredient, water: Ingredient, salt: Ingredient, levain: Ingredient, ingredients: [Ingredient] = [
             Ingredient(category: .Dough, name: "Farinha", amount: "", percentage: "", isFarinha: true),
@@ -72,5 +75,7 @@ class Recipe: Identifiable {
             break
         }
     }
+    
+    //This should go to a service layer
     
 }

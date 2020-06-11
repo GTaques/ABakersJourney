@@ -10,6 +10,9 @@
 		290AA673248D6278005CCA12 /* BindingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290AA672248D6278005CCA12 /* BindingExtension.swift */; };
 		290AA675248D6597005CCA12 /* RecipeIngredientsFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290AA674248D6597005CCA12 /* RecipeIngredientsFormView.swift */; };
 		290AA677248EEB52005CCA12 /* ReceitasViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290AA676248EEB51005CCA12 /* ReceitasViewModel.swift */; };
+		290AA67B248FE771005CCA12 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 290AA67A248FE771005CCA12 /* CloudKit.framework */; };
+		290AA6A32491456E005CCA12 /* Scope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290AA6A22491456E005CCA12 /* Scope.swift */; };
+		290AA6A5249145C2005CCA12 /* RecipeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290AA6A4249145C2005CCA12 /* RecipeCategory.swift */; };
 		2913F425247C85CD00F377BF /* CreateIngredientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2913F424247C85CD00F377BF /* CreateIngredientView.swift */; };
 		2913F427247C91B800F377BF /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2913F426247C91B800F377BF /* Shared.swift */; };
 		2913F429247C9B1500F377BF /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2913F428247C9B1500F377BF /* ImageHelper.swift */; };
@@ -35,6 +38,10 @@
 		290AA672248D6278005CCA12 /* BindingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingExtension.swift; sourceTree = "<group>"; };
 		290AA674248D6597005CCA12 /* RecipeIngredientsFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeIngredientsFormView.swift; sourceTree = "<group>"; };
 		290AA676248EEB51005CCA12 /* ReceitasViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceitasViewModel.swift; sourceTree = "<group>"; };
+		290AA678248FE745005CCA12 /* ABakersJourney.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ABakersJourney.entitlements; sourceTree = "<group>"; };
+		290AA67A248FE771005CCA12 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		290AA6A22491456E005CCA12 /* Scope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scope.swift; sourceTree = "<group>"; };
+		290AA6A4249145C2005CCA12 /* RecipeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCategory.swift; sourceTree = "<group>"; };
 		2913F424247C85CD00F377BF /* CreateIngredientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIngredientView.swift; sourceTree = "<group>"; };
 		2913F426247C91B800F377BF /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
 		2913F428247C9B1500F377BF /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
@@ -63,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				290AA67B248FE771005CCA12 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +83,14 @@
 				290AA672248D6278005CCA12 /* BindingExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		290AA679248FE771005CCA12 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				290AA67A248FE771005CCA12 /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		2913F422247C85A900F377BF /* Ingredient */ = {
@@ -101,6 +117,7 @@
 			children = (
 				291E7EBB2472D0CB0024502D /* ABakersJourney */,
 				291E7EBA2472D0CB0024502D /* Products */,
+				290AA679248FE771005CCA12 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -115,6 +132,7 @@
 		291E7EBB2472D0CB0024502D /* ABakersJourney */ = {
 			isa = PBXGroup;
 			children = (
+				290AA678248FE745005CCA12 /* ABakersJourney.entitlements */,
 				290AA671248D6269005CCA12 /* Extensions */,
 				29DF476B2485481E00691AC4 /* ViewModels */,
 				295B896324735D9300D532A4 /* Models */,
@@ -143,6 +161,8 @@
 			children = (
 				2921727E248C500D00BABEEA /* RecipeCategories.swift */,
 				29217280248C513000BABEEA /* Criteria.swift */,
+				290AA6A22491456E005CCA12 /* Scope.swift */,
+				290AA6A4249145C2005CCA12 /* RecipeCategory.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -270,6 +290,7 @@
 				2913F425247C85CD00F377BF /* CreateIngredientView.swift in Sources */,
 				2921727F248C500D00BABEEA /* RecipeCategories.swift in Sources */,
 				290AA673248D6278005CCA12 /* BindingExtension.swift in Sources */,
+				290AA6A32491456E005CCA12 /* Scope.swift in Sources */,
 				291E7EBD2472D0CB0024502D /* AppDelegate.swift in Sources */,
 				295B07F42474201C00A6C57C /* Recipe.swift in Sources */,
 				295B89692473648200D532A4 /* RecipeCardView.swift in Sources */,
@@ -285,6 +306,7 @@
 				291E7EC12472D0CB0024502D /* ContentView.swift in Sources */,
 				2913F429247C9B1500F377BF /* ImageHelper.swift in Sources */,
 				290AA675248D6597005CCA12 /* RecipeIngredientsFormView.swift in Sources */,
+				290AA6A5249145C2005CCA12 /* RecipeCategory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,6 +442,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ABakersJourney/ABakersJourney.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"ABakersJourney/Preview Content\"";
 				DEVELOPMENT_TEAM = Z9M62WF3J6;
@@ -440,6 +463,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ABakersJourney/ABakersJourney.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"ABakersJourney/Preview Content\"";
 				DEVELOPMENT_TEAM = Z9M62WF3J6;

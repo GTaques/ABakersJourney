@@ -44,7 +44,7 @@ struct CreateIngredientView: View {
                         TextField("Porcentagem (%)", text: self.$ingredient.percentage).keyboardType(.numberPad)
                     }
                     Picker(selection: self.$ingredient.category, label: Text("Categoria")) {
-                        ForEach(Category.allCases, id: \.self) {
+                        ForEach(IngredientCategory.allCases, id: \.self) {
                             Text($0.rawValue)
                         }
                     }
