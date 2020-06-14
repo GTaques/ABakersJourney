@@ -10,13 +10,12 @@ import SwiftUI
 
 struct CreateRecipeView: View {
     
-//    @State var receita: Recipe = Recipe(flour: Ingredient(), water: Ingredient(), salt: Ingredient(), levain: Ingredient(), ingredients: [Ingredient()])
-    
     @State var ingredients: [Ingredient] = [Ingredient(category: .Dough, name: "Farinha", amount: "", percentage: "", isFarinha: true), Ingredient(category: .Dough, name: "Água", amount: "", percentage: ""), Ingredient(category: .Dough, name: "Levain", amount: "", percentage: ""), Ingredient(category: .Dough, name: "Sal", amount: "", percentage: "")
         ]
     @State var showingCreateIngredient: Bool = false
     @State var isEditMode: Bool = true
     
+    @EnvironmentObject var receitasViewModel: ReceitasViewModel
     @ObservedObject var receitaViewModel: ReceitaViewModel = ReceitaViewModel()
     
     
@@ -27,13 +26,13 @@ struct CreateRecipeView: View {
         NavigationView {
             GeometryReader { geometry in
                 VStack {
-                    RecipeSummaryView(receitaViewModel: self.receitaViewModel).frame(width: geometry.size.width, height: geometry.size.height * 0.3)
+//                    RecipeSummaryView(receitaViewModel: self.receitaViewModel).frame(width: geometry.size.width, height: geometry.size.height * 0.3)
                     Form {
                         Section(header: Text("Informações Básicas")) {
                             TextField("Nome", text: self.$receitaViewModel.receita.title)
                             TextField("Descrição", text: self.$receitaViewModel.receita.description)
                         }
-                        RecipeIngredientsFormView(receitaViewModel: self.receitaViewModel, criterion: self.$receitaViewModel.receita.criterion, showingCreateIngredient: self.showingCreateIngredient)
+//                        RecipeIngredientsFormView(receitaViewModel: self.receitaViewModel, criterion: self.$receitaViewModel.receita.criterion, showingCreateIngredient: self.showingCreateIngredient)
 //                        Section(header: Text("Ingredientes")) {
 //                            Picker("", selection: criterion) {
 //                                ForEach(Criteria.allCases, id: \.self) { c in
@@ -79,6 +78,7 @@ struct CreateRecipeView: View {
                     CloudKitHelper.save(item: self.receitaViewModel.receita) { (result) in
                         switch result {
                         case .success(let newItem):
+                            self.receitasViewModel.receitas.append(newItem)
                             print("saved")
                         case .failure(let err):
                             print(err.localizedDescription)

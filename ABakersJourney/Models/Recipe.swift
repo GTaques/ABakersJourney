@@ -25,12 +25,6 @@ struct Recipe: Identifiable {
     var criterion: Criteria
     var imageName: String?
     var scope: Scope
-    var auxiliarReload: Bool = false
-    
-//    var flour: Ingredient 
-//    var water: Ingredient 
-//    var salt: Ingredient
-//    var levain: Ingredient
     var ingredients: [Ingredient] = []
     
     

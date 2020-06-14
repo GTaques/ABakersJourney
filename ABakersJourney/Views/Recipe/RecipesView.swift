@@ -91,11 +91,20 @@ struct RecipesView: View {
     }
     
     func loadRecipes() {
-        self.receitasViewModel.refresh { error in
-            if let error = error {
-                print("Erro ao carregar receitas")
+        CloudKitHelper.fetch { (result) in
+            switch result {
+            case .success(let newItem):
+                self.receitasViewModel.receitas.append(newItem)
+                print("Successfully fetched item")
+            case .failure(let err):
+                print(err.localizedDescription)
             }
         }
+//        self.receitasViewModel.refresh { error in
+//            if let error = error {
+//                print("Erro ao carregar receitas")
+//            }
+//        }
     }
     
 }
