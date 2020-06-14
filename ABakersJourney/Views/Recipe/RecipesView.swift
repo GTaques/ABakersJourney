@@ -11,7 +11,7 @@ import Combine
 
 struct RecipesView: View {
     
-    @State var receitasViewModel: ReceitasViewModel = ReceitasViewModel()
+    @EnvironmentObject var receitasViewModel: ReceitasViewModel
     
     var body: some View {
         GeometryReader { geometry in

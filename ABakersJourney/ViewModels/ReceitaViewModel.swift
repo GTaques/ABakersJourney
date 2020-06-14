@@ -10,15 +10,15 @@ import SwiftUI
 import Combine
 
 class ReceitaViewModel: ObservableObject {
-    @Published var receita: Recipe {
-        didSet {
-            receita.calculatePercentages(criterion: self.receita.criterion)
-        }
-    }
+    @Published var receita: Recipe = Recipe(title: "", description: "", category: .bread, totalAmoountOfFlour: 0, criterion: .grams, scope: .new)
+//        didSet {
+//            receita.calculatePercentages(criterion: self.receita.criterion)
+//        }
+   
     
-    init() {
-        self.receita = Recipe(title: "", category: .bread, totalAmoountOfFlour: 0, criterion: .grams, scope: .new)
-    }
+//    init() {
+//        self.receita =
+//    }
     
     
 }

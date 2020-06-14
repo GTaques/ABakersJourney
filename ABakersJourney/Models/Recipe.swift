@@ -11,13 +11,13 @@ import Combine
 import UIKit
 import CloudKit
 
-class Recipe: Identifiable {
+struct Recipe: Identifiable {
     
     static let recordType = "Recipe"
     let id = UUID()
     private var recordId: CKRecord.ID?
     var title: String
-    var description: String?
+    var description: String
     var database: CKDatabase?
     var category: RecipeCategory
     var coverImage: CKAsset?
@@ -25,6 +25,7 @@ class Recipe: Identifiable {
     var criterion: Criteria
     var imageName: String?
     var scope: Scope
+    var auxiliarReload: Bool = false
     
 //    var flour: Ingredient 
 //    var water: Ingredient 
@@ -33,8 +34,9 @@ class Recipe: Identifiable {
     var ingredients: [Ingredient] = []
     
     
-    init(title: String, category: RecipeCategory, totalAmoountOfFlour: Double, criterion: Criteria, scope: Scope, ingredients: [Ingredient] = [Ingredient(category: .Dough, name: "", amount: "", percentage: "", isFarinha: true)]) {
+    init(title: String, description: String, category: RecipeCategory, totalAmoountOfFlour: Double, criterion: Criteria, scope: Scope, ingredients: [Ingredient] = [Ingredient(category: .Dough, name: "", amount: "", percentage: "", isFarinha: true)]) {
         self.title = title
+        self.description = description
         self.category = category
         self.totalAmountOfFlour = totalAmoountOfFlour
         self.criterion = criterion
@@ -44,10 +46,11 @@ class Recipe: Identifiable {
     
     init?(record: CKRecord, database: CKDatabase) {
         guard let title = record["title"] as? String else { return nil }
+        guard let description = record["description"] as? String else { return nil }
         
         recordId = record.recordID
         self.title = title
-        self.description = record["description"]
+        self.description = description
         self.database = database
         if let categoryValue = record["category"] as? Int,
             let category = RecipeCategory(rawValue: categoryValue) {
@@ -78,7 +81,7 @@ class Recipe: Identifiable {
         
     }
     
-    func calculatePercentages(criterion: Criteria) {
+    mutating func calculatePercentages(criterion: Criteria) {
         self.totalAmountOfFlour = 0
         for ing in ingredients.filter({$0.isFarinha == true}) {
             if !ing.amount.isEmpty {

@@ -54,6 +54,9 @@ class ReceitasViewModel: ObservableObject {
             self.receitas = results.compactMap {
                 Recipe(record: $0, database: self.publicDB)
             }
+            let r = self.receitas
+            self.receitas = r
+            self.receitas[0].auxiliarReload.toggle()
             DispatchQueue.main.async {
                 completion(nil)
             }
