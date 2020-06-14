@@ -84,10 +84,24 @@ struct CloudKitHelper {
         CKContainer.default().publicCloudDatabase.add(operation)
     }
     
-    static func delete(recordID: CKRecord.ID, completion: @escaping (Result<Recipe, Error>) -> ()) {
-        
+    static func delete(recordID: CKRecord.ID, completion: @escaping (Result<CKRecord.ID, Error>) -> ()) {
+        CKContainer.default().publicCloudDatabase.delete(withRecordID: recordID) { (recordID, err) in
+            DispatchQueue.main.async {
+                if let err = err {
+                    completion(.failure(err))
+                    return
+                }
+                guard let recordID = recordID else {
+                    completion(.failure(CloudKitErrorHelper.recordIDFailure))
+                    return
+                }
+                completion(.success(recordID))
+            }
+        }
     }
     
-    static func modify(item: Recipe, completion: @escaping (Result<Recipe, Error>) -> ()) {}
+    static func modify(item: Recipe, completion: @escaping (Result<Recipe, Error>) -> ()) {
+        
+    }
     
 }
