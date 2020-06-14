@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CreateRecipeView: View {
     
-    @State var receita: Recipe = Recipe(flour: Ingredient(), water: Ingredient(), salt: Ingredient(), levain: Ingredient(), ingredients: [Ingredient()])
+//    @State var receita: Recipe = Recipe(flour: Ingredient(), water: Ingredient(), salt: Ingredient(), levain: Ingredient(), ingredients: [Ingredient()])
     
     @State var ingredients: [Ingredient] = [Ingredient(category: .Dough, name: "Farinha", amount: "", percentage: "", isFarinha: true), Ingredient(category: .Dough, name: "Água", amount: "", percentage: ""), Ingredient(category: .Dough, name: "Levain", amount: "", percentage: ""), Ingredient(category: .Dough, name: "Sal", amount: "", percentage: "")
         ]
@@ -18,6 +18,7 @@ struct CreateRecipeView: View {
     @State var isEditMode: Bool = true
     
     @ObservedObject var receitaViewModel: ReceitaViewModel = ReceitaViewModel()
+    
     
     
     var steps: [String] = ["Ativar Fermento", "Autólise", "Adicionar Levain", "Adicionar Sal", "Laminação", "Dobra #1", "Dobra #2", "Dobra #3", "Modelagem"]
@@ -29,8 +30,8 @@ struct CreateRecipeView: View {
                     RecipeSummaryView(receitaViewModel: self.receitaViewModel).frame(width: geometry.size.width, height: geometry.size.height * 0.3)
                     Form {
                         Section(header: Text("Informações Básicas")) {
-                            TextField("Nome", text: self.$receita.title)
-                            TextField("Descrição", text: self.$receita.description)
+                            TextField("Nome", text: self.$receitaViewModel.receita.title)
+                            TextField("Descrição", text: self.$receitaViewModel.receita.description)
                         }
                         RecipeIngredientsFormView(receitaViewModel: self.receitaViewModel, criterion: self.$receitaViewModel.receita.criterion, showingCreateIngredient: self.showingCreateIngredient)
 //                        Section(header: Text("Ingredientes")) {
@@ -61,19 +62,30 @@ struct CreateRecipeView: View {
 //                                CreateIngredientView(showingCreateIngredient: self.$showingCreateIngredient, receitaViewModel: self.receitaViewModel)
 //                            }
 //                        }
-                        Section(header: Text("Etapas")) {
-                            List(self.steps, id: \.self) { step in
-                                HStack {
-                                    Image(systemName: "1.circle.fill")
-                                    Text(step)
-                                }
-                            }
-                        }
+//                        Section(header: Text("Etapas")) {
+//                            List(self.steps, id: \.self) { step in
+//                                HStack {
+//                                    Image(systemName: "1.circle.fill")
+//                                    Text(step)
+//                                }
+//                            }
+//                        }
                     }.frame(width: geometry.size.width, height: geometry.size.height * 0.7)
                 }
             }
             .navigationBarTitle("Criar Receita")
             .navigationBarItems(leading: EditButton(), trailing: Button(action: {
+                if !self.receitaViewModel.receita.title.isEmpty {
+                    CloudKitHelper.save(item: self.receitaViewModel.receita) { (result) in
+                        switch result {
+                        case .success(let newItem):
+                            print("saved")
+                        case .failure(let err):
+                            print(err.localizedDescription)
+                        }
+                    }
+                    self.receitaViewModel.receita = Recipe(title: "", description: "", category: .bread, totalAmoountOfFlour: 0, criterion: .grams, scope: .new)
+                }
                 print("Saved")
             }) { Text("Save")
             })

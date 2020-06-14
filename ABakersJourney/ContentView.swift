@@ -9,6 +9,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @EnvironmentObject var receitasViewModel: ReceitasViewModel 
+    
     var body: some View {
         TabView {
             RecipesView()
