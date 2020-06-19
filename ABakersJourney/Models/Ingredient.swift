@@ -15,7 +15,7 @@ enum IngredientCategory: String, CaseIterable {
 }
 
 class Ingredient: Identifiable {
-    
+    static let recordType = "Ingredient"
     var id = UUID()
     
     var category: IngredientCategory

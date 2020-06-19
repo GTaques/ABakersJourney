@@ -9,40 +9,46 @@
 import Foundation
 import Combine
 import UIKit
+import CloudKit
 
 class Recipe: Identifiable {
-    
-    var id = UUID()
+    static let recordType = "Recipe"
+    let id = UUID()
+    private var recordId: CKRecord.ID?
     var title: String
     var description: String
-    var category: RecipeCategory = .bread
-    var coverImage: UIImage = UIImage()
-    
-    var flour: Ingredient 
-    var water: Ingredient 
-    var salt: Ingredient
-    var levain: Ingredient
+    var database: CKDatabase?
+    var category: RecipeCategory
+    var coverImage: CKAsset?
+    var totalAmountOfFlour: Double
+    var criterion: Criteria
+    var imageName: String?
+    var scope: Scope
     var ingredients: [Ingredient]
-    var totalAmountOfFlour: Double = 0
-    var criterion: Criteria = .grams
-    var imageName: String
-    var scope: Scope = .new
     
+    init() {
+        self.title = ""
+        self.description = ""
+        self.category = .bread
+        self.totalAmountOfFlour = 0
+        self.criterion = .grams
+        self.scope = .new
+        self.ingredients = []
+    }
     
-    init(title: String = "", description: String = "", flour: Ingredient, water: Ingredient, salt: Ingredient, levain: Ingredient, ingredients: [Ingredient] = [
-            Ingredient(category: .Dough, name: "Farinha", amount: "", percentage: "", isFarinha: true),
-            Ingredient(category: .Dough, name: "Água", amount: "", percentage: ""),
-            Ingredient(category: .Dough, name: "Levain", amount: "", percentage: ""),
-            Ingredient(category: .Dough, name: "Sal", amount: "", percentage: "")
-        ], imageName: String = "") {
+    init(title: String, description: String, category: RecipeCategory, totalAmountOfFlour: Double, criterion: Criteria, scope: Scope, ingredients: [Ingredient] = [
+        Ingredient(category: .Dough, name: "Farinha", amount: "0", percentage: "0", isFarinha: true),
+        Ingredient(category: .Dough, name: "Água", amount: "0", percentage: "0", isFarinha: false),
+        Ingredient(category: .Dough, name: "Levain", amount: "0", percentage: "0", isFarinha: false),
+        Ingredient(category: .Dough, name: "Salt", amount: "0", percentage: "0", isFarinha: false),
+        ]) {
         self.title = title
         self.description = description
-        self.flour = flour
-        self.water = water
-        self.salt = salt
-        self.levain = levain
+        self.category = category
+        self.totalAmountOfFlour = totalAmountOfFlour
+        self.criterion = criterion
+        self.scope = scope
         self.ingredients = ingredients
-        self.imageName = imageName
     }
     
     func calculatePercentages(criterion: Criteria) {
@@ -73,9 +79,44 @@ class Recipe: Identifiable {
                 }
             }
             break
+        default:
+            break
+        }
+    }
+}
+
+extension Recipe: Storable {
+    var recordType: String {
+        get {
+            return "Recipe"
+        }
+        set {
+            recordType = "Recipe"
         }
     }
     
-    //This should go to a service layer
+    func parseToRecord<T>(entity: T) -> CKRecord where T : Storable {
+        let record = CKRecord(recordType: RecordType.Recipe)
+        if let entity = entity as? Recipe {
+            record["title"] = entity.title
+            record["description"] = entity.description
+        }
+        return record
+    }
+    
+    func parseToEntity<T>(record: T) -> Storable where T : CKRecord {
+        //        let recordID = record.recordID
+        let title = record["title"]
+        let description = record["title"]
+        
+        return Recipe(title: title as! String, description: description as! String, category: .bread, totalAmountOfFlour: 0, criterion: .grams, scope: .new)
+    }
+    
+    func retrieveDesiredKeys(recordType: String) -> [String] {
+        return ["title", "description"]
+        
+    }
+    
+    
     
 }
