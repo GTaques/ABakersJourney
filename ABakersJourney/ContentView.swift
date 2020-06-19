@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @EnvironmentObject var receitasViewModel: ReceitasViewModel 
+//    @EnvironmentObject var receitasViewModel: ReceitasViewModel 
     
     var body: some View {
         TabView {

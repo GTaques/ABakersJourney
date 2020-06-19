@@ -24,6 +24,6 @@ enum CloudKitErrorHelper: Error {
 protocol PCloudKitService {
     static func save<T:Storable>(item: T, completion: @escaping (Result<T, Error>) -> ())
     static func fetch<T:Storable>(entity: T, completion: @escaping (Result<Storable, Error>) -> ())
-//    static func delete<T>(recordID: T, completion: @escaping (Result<T, Error>) -> ())
+    static func delete(recordID: CKRecord.ID, completion: @escaping (Result<CKRecord.ID, Error>) -> ())
 //    static func modify<T>(item: T, completion: @escaping (Result<T, Error>) -> ())
 }

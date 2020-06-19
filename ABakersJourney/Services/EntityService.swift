@@ -10,6 +10,7 @@ import Foundation
 import CloudKit
 
 struct EntityService: PCloudKitService {
+    
     static func save<T>(item: T, completion: @escaping (Result<T, Error>) -> ()) where T : Storable {
         let itemRecord = item.parseToRecord(entity: item)
         CKContainer.default().publicCloudDatabase.save(itemRecord) { record, error in
@@ -62,4 +63,21 @@ struct EntityService: PCloudKitService {
         
         CKContainer.default().publicCloudDatabase.add(operation)
     }
+    
+    static func delete(recordID: CKRecord.ID, completion: @escaping (Result<CKRecord.ID, Error>) -> ()) {
+        CKContainer.default().publicCloudDatabase.delete(withRecordID: recordID) { (recordID, err) in
+            DispatchQueue.main.async {
+                if let err = err {
+                    completion(.failure(err))
+                    return
+                }
+                guard let recordID = recordID else {
+                    completion(.failure(CloudKitErrorHelper.recordIDFailure))
+                    return
+                }
+                completion(.success(recordID))
+            }
+        }
+    }
+    
 }

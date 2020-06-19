@@ -11,7 +11,7 @@ import Combine
 import UIKit
 import CloudKit
 
-struct Recipe: Identifiable {
+class Recipe: Identifiable {
     static let recordType = "Recipe"
     let id = UUID()
     private var recordId: CKRecord.ID?
@@ -51,7 +51,7 @@ struct Recipe: Identifiable {
         self.ingredients = ingredients
     }
     
-    mutating func calculatePercentages(criterion: Criteria) {
+    func calculatePercentages(criterion: Criteria) {
         self.totalAmountOfFlour = 0
         for ing in ingredients.filter({$0.isFarinha == true}) {
             if !ing.amount.isEmpty {
