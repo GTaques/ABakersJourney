@@ -12,6 +12,7 @@ import Combine
 struct RecipesView: View {
     
     @EnvironmentObject var receitasViewModel: ReceitasViewModel
+    var recipe: Recipe = Recipe()
     
     var body: some View {
         GeometryReader { geometry in
@@ -91,22 +92,19 @@ struct RecipesView: View {
     }
     
     func loadRecipes() {
-        CloudKitHelper.fetch { (result) in
+        EntityService.fetch(entity: recipe) { (result) in
             switch result {
             case .success(let newItem):
-                self.receitasViewModel.receitas.append(newItem)
-                print("Successfully fetched item")
+                self.receitasViewModel.receitas.append(newItem as! Recipe)
+                self.receitasViewModel.receitas[0].scope = .new
+                for item in self.receitasViewModel.receitas {
+                    print(item.title)
+                }
             case .failure(let err):
                 print(err.localizedDescription)
             }
         }
-//        self.receitasViewModel.refresh { error in
-//            if let error = error {
-//                print("Erro ao carregar receitas")
-//            }
-//        }
     }
-    
 }
 
 struct RecipesView_Previews: PreviewProvider {

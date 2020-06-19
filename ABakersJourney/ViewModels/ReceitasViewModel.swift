@@ -16,10 +16,12 @@ class ReceitasViewModel: ObservableObject {
     let container: CKContainer
     let publicDB: CKDatabase
     let privateDB: CKDatabase
+    var counterSet = 0
     
     @Published var receitas: [Recipe] {
         didSet {
-            print("Loaded Recipes")
+            counterSet += 1
+            print("Loaded Recipes \(counterSet) times")
         }
     }
     
@@ -31,32 +33,32 @@ class ReceitasViewModel: ObservableObject {
         
     }
     
-    @objc
-    func refresh(_ completion: @escaping (Error?) -> Void) {
-        let predicate = NSPredicate(value: true)
-        
-        let query = CKQuery(recordType: "Recipe", predicate: predicate)
-        recipes(forQuery: query, completion)
-    }
-    
-    private func recipes(forQuery query: CKQuery, _ completion: @escaping (Error?) -> Void) {
-        publicDB.perform(query, inZoneWith: CKRecordZone.default().zoneID) { [weak self] results, error in
-            guard let self = self else { return }
-
-            if let error = error {
-                DispatchQueue.main.async {
-                    completion(error)
-                }
-                return
-            }
-
-            guard let results = results else { return }
-            self.receitas = results.compactMap {
-                Recipe(record: $0, database: self.publicDB)
-            }
-            DispatchQueue.main.async {
-                completion(nil)
-            }
-        }
-    }
+//    @objc
+//    func refresh(_ completion: @escaping (Error?) -> Void) {
+//        let predicate = NSPredicate(value: true)
+//        
+//        let query = CKQuery(recordType: "Recipe", predicate: predicate)
+//        recipes(forQuery: query, completion)
+//    }
+//    
+//    private func recipes(forQuery query: CKQuery, _ completion: @escaping (Error?) -> Void) {
+//        publicDB.perform(query, inZoneWith: CKRecordZone.default().zoneID) { [weak self] results, error in
+//            guard let self = self else { return }
+//
+//            if let error = error {
+//                DispatchQueue.main.async {
+//                    completion(error)
+//                }
+//                return
+//            }
+//
+//            guard let results = results else { return }
+//            self.receitas = results.compactMap {
+//                Recipe(record: $0, database: self.publicDB)
+//            }
+//            DispatchQueue.main.async {
+//                completion(nil)
+//            }
+//        }
+//    }
 }

@@ -11,5 +11,4 @@ import Foundation
 enum Criteria: String, CaseIterable {
     case grams = "g"
     case percentage = "%"
-    case none = ""
 }

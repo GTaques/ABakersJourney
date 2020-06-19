@@ -41,7 +41,7 @@ struct CloudKitHelper {
                     completion(.failure(CloudKitErrorHelper.castFailure))
                     return
                 }
-                let element = Recipe(title: title, description: description ,category: .bread, totalAmoountOfFlour: 0, criterion: .grams, scope: .new)
+                let element = Recipe(title: title, description: description ,category: .bread, totalAmountOfFlour: 0, criterion: .grams, scope: .new)
                 completion(.success(element))
             }
         }
@@ -61,7 +61,7 @@ struct CloudKitHelper {
             DispatchQueue.main.async {
                 let recordID = record.recordID
                 guard let title = record["title"] as? String else { return }
-                let recipe = Recipe(title: title, description: "", category: .bread, totalAmoountOfFlour: 0, criterion: .grams, scope: .new)
+                let recipe = Recipe(title: title, description: "", category: .bread, totalAmountOfFlour: 0, criterion: .grams, scope: .new)
                 completion(.success(recipe))
             }
         }
