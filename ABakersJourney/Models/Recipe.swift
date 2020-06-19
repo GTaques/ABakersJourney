@@ -11,8 +11,7 @@ import Combine
 import UIKit
 import CloudKit
 
-struct Recipe: Identifiable {
-    
+class Recipe: Identifiable {
     static let recordType = "Recipe"
     let id = UUID()
     private var recordId: CKRecord.ID?
@@ -25,63 +24,34 @@ struct Recipe: Identifiable {
     var criterion: Criteria
     var imageName: String?
     var scope: Scope
-    var auxiliarReload: Bool = false
+    var ingredients: [Ingredient]
     
-//    var flour: Ingredient 
-//    var water: Ingredient 
-//    var salt: Ingredient
-//    var levain: Ingredient
-    var ingredients: [Ingredient] = []
+    init() {
+        self.title = ""
+        self.description = ""
+        self.category = .bread
+        self.totalAmountOfFlour = 0
+        self.criterion = .grams
+        self.scope = .new
+        self.ingredients = []
+    }
     
-    
-    init(title: String, description: String, category: RecipeCategory, totalAmoountOfFlour: Double, criterion: Criteria, scope: Scope, ingredients: [Ingredient] = [Ingredient(category: .Dough, name: "", amount: "", percentage: "", isFarinha: true)]) {
+    init(title: String, description: String, category: RecipeCategory, totalAmountOfFlour: Double, criterion: Criteria, scope: Scope, ingredients: [Ingredient] = [
+        Ingredient(category: .Dough, name: "Farinha", amount: "0", percentage: "0", isFarinha: true),
+        Ingredient(category: .Dough, name: "Água", amount: "0", percentage: "0", isFarinha: false),
+        Ingredient(category: .Dough, name: "Levain", amount: "0", percentage: "0", isFarinha: false),
+        Ingredient(category: .Dough, name: "Salt", amount: "0", percentage: "0", isFarinha: false),
+        ]) {
         self.title = title
         self.description = description
         self.category = category
-        self.totalAmountOfFlour = totalAmoountOfFlour
+        self.totalAmountOfFlour = totalAmountOfFlour
         self.criterion = criterion
         self.scope = scope
         self.ingredients = ingredients
     }
     
-    init?(record: CKRecord, database: CKDatabase) {
-        guard let title = record["title"] as? String else { return nil }
-        guard let description = record["description"] as? String else { return nil }
-        
-        recordId = record.recordID
-        self.title = title
-        self.description = description
-        self.database = database
-        if let categoryValue = record["category"] as? Int,
-            let category = RecipeCategory(rawValue: categoryValue) {
-            self.category = category
-        } else {
-            self.category = .none
-        }
-        self.coverImage = record["coverImage"] as? CKAsset
-        if let totalAmountOfFlour = record["totalAmountOfFlour"] as? Double {
-            self.totalAmountOfFlour = totalAmountOfFlour
-        } else {
-            self.totalAmountOfFlour = 0
-        }
-        if let criterionValue = record["criterion"] as? String,
-            let criterion = Criteria(rawValue: criterionValue) {
-            self.criterion = criterion
-        } else {
-            self.criterion = .none
-        }
-        self.imageName = record["imageName"]
-        if let scopeValue = record["scope"] as? Int,
-            let scope = Scope(rawValue: scopeValue) {
-            self.scope = scope
-        } else {
-            self.scope = .new
-        }
-        
-        
-    }
-    
-    mutating func calculatePercentages(criterion: Criteria) {
+    func calculatePercentages(criterion: Criteria) {
         self.totalAmountOfFlour = 0
         for ing in ingredients.filter({$0.isFarinha == true}) {
             if !ing.amount.isEmpty {
@@ -113,7 +83,40 @@ struct Recipe: Identifiable {
             break
         }
     }
+}
+
+extension Recipe: Storable {
+    var recordType: String {
+        get {
+            return "Recipe"
+        }
+        set {
+            recordType = "Recipe"
+        }
+    }
     
-    //This should go to a service layer
+    func parseToRecord<T>(entity: T) -> CKRecord where T : Storable {
+        let record = CKRecord(recordType: RecordType.Recipe)
+        if let entity = entity as? Recipe {
+            record["title"] = entity.title
+            record["description"] = entity.description
+        }
+        return record
+    }
+    
+    func parseToEntity<T>(record: T) -> Storable where T : CKRecord {
+        //        let recordID = record.recordID
+        let title = record["title"]
+        let description = record["title"]
+        
+        return Recipe(title: title as! String, description: description as! String, category: .bread, totalAmountOfFlour: 0, criterion: .grams, scope: .new)
+    }
+    
+    func retrieveDesiredKeys(recordType: String) -> [String] {
+        return ["title", "description"]
+        
+    }
+    
+    
     
 }

@@ -31,7 +31,9 @@
 		295B89692473648200D532A4 /* RecipeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295B89682473648200D532A4 /* RecipeCardView.swift */; };
 		29D4AC562489CF0300D6BCC3 /* BakersMathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D4AC552489CF0300D6BCC3 /* BakersMathView.swift */; };
 		29DF476D2485483700691AC4 /* ReceitaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DF476C2485483700691AC4 /* ReceitaViewModel.swift */; };
-		29FF9BB32495B0F40073A7DC /* CloudKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF9BB22495B0F40073A7DC /* CloudKitHelper.swift */; };
+		29FF9BB52497EBEF0073A7DC /* PCloudKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF9BB42497EBEF0073A7DC /* PCloudKitService.swift */; };
+		29FF9BBB249906E60073A7DC /* EntityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF9BBA249906E60073A7DC /* EntityService.swift */; };
+		29FF9BBD24990F5F0073A7DC /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF9BBC24990F5F0073A7DC /* Storable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,7 +64,9 @@
 		295B89682473648200D532A4 /* RecipeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCardView.swift; sourceTree = "<group>"; };
 		29D4AC552489CF0300D6BCC3 /* BakersMathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakersMathView.swift; sourceTree = "<group>"; };
 		29DF476C2485483700691AC4 /* ReceitaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceitaViewModel.swift; sourceTree = "<group>"; };
-		29FF9BB22495B0F40073A7DC /* CloudKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitHelper.swift; sourceTree = "<group>"; };
+		29FF9BB42497EBEF0073A7DC /* PCloudKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCloudKitService.swift; sourceTree = "<group>"; };
+		29FF9BBA249906E60073A7DC /* EntityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityService.swift; sourceTree = "<group>"; };
+		29FF9BBC24990F5F0073A7DC /* Storable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +198,7 @@
 				295B07F52474206800A6C57C /* Ingredient.swift */,
 				2913F426247C91B800F377BF /* Shared.swift */,
 				2913F428247C9B1500F377BF /* ImageHelper.swift */,
+				29FF9BBC24990F5F0073A7DC /* Storable.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -218,7 +223,8 @@
 		29FF9BB12495B0DD0073A7DC /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				29FF9BB22495B0F40073A7DC /* CloudKitHelper.swift */,
+				29FF9BB42497EBEF0073A7DC /* PCloudKitService.swift */,
+				29FF9BBA249906E60073A7DC /* EntityService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -295,10 +301,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				295B89622473421500D532A4 /* CreateRecipeView.swift in Sources */,
+				29FF9BBB249906E60073A7DC /* EntityService.swift in Sources */,
 				2913F425247C85CD00F377BF /* CreateIngredientView.swift in Sources */,
 				290AA673248D6278005CCA12 /* BindingExtension.swift in Sources */,
 				290AA6A32491456E005CCA12 /* Scope.swift in Sources */,
 				291E7EBD2472D0CB0024502D /* AppDelegate.swift in Sources */,
+				29FF9BBD24990F5F0073A7DC /* Storable.swift in Sources */,
 				295B07F42474201C00A6C57C /* Recipe.swift in Sources */,
 				295B89692473648200D532A4 /* RecipeCardView.swift in Sources */,
 				295B07F62474206800A6C57C /* Ingredient.swift in Sources */,
@@ -307,11 +315,11 @@
 				29434CAE247AEE38008EDFA2 /* RecipeSummaryView.swift in Sources */,
 				291E7EBF2472D0CB0024502D /* SceneDelegate.swift in Sources */,
 				29D4AC562489CF0300D6BCC3 /* BakersMathView.swift in Sources */,
+				29FF9BB52497EBEF0073A7DC /* PCloudKitService.swift in Sources */,
 				29217281248C513000BABEEA /* Criteria.swift in Sources */,
 				290AA677248EEB52005CCA12 /* ReceitasViewModel.swift in Sources */,
 				2913F427247C91B800F377BF /* Shared.swift in Sources */,
 				291E7EC12472D0CB0024502D /* ContentView.swift in Sources */,
-				29FF9BB32495B0F40073A7DC /* CloudKitHelper.swift in Sources */,
 				2913F429247C9B1500F377BF /* ImageHelper.swift in Sources */,
 				290AA675248D6597005CCA12 /* RecipeIngredientsFormView.swift in Sources */,
 				290AA6A5249145C2005CCA12 /* RecipeCategory.swift in Sources */,

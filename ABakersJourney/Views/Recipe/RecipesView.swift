@@ -11,7 +11,8 @@ import Combine
 
 struct RecipesView: View {
     
-    @EnvironmentObject var receitasViewModel: ReceitasViewModel
+    @ObservedObject var receitasViewModel: ReceitasViewModel = ReceitasViewModel()
+    var recipe: Recipe = Recipe()
     
     var body: some View {
         GeometryReader { geometry in
@@ -35,7 +36,7 @@ struct RecipesView: View {
                                 }
                             }
                         }
-                        
+
                     }.padding(EdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 0))
                     VStack(alignment: .leading) {
                         HStack {
@@ -55,11 +56,11 @@ struct RecipesView: View {
                                         Text("Mixed Flours").bold()
                                         Text("by: Author Name")
                                     }
-                                    
+
                                 }
                             }
                         }
-                        
+
                     }.padding(EdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 0))
                     VStack(alignment: .leading) {
                         HStack {
@@ -79,11 +80,11 @@ struct RecipesView: View {
                                         Text("Mixed Flours").bold()
                                         Text("by: Author Name")
                                     }
-                                    
+
                                 }
                             }
                         }
-                        
+
                     }.padding(EdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 0))
                 }
             }
@@ -91,13 +92,18 @@ struct RecipesView: View {
     }
     
     func loadRecipes() {
-        self.receitasViewModel.refresh { error in
-            if let error = error {
-                print("Erro ao carregar receitas")
+        var recipesArray = [Recipe]()
+        EntityService.fetch(entity: recipe) { (result) in
+            switch result {
+            case .success(let newItem):
+                recipesArray.append(newItem as! Recipe)
+                self.receitasViewModel.receitas = recipesArray
+                self.receitasViewModel.auxBool.toggle()
+            case .failure(let err):
+                print(err.localizedDescription)
             }
         }
     }
-    
 }
 
 struct RecipesView_Previews: PreviewProvider {

@@ -45,7 +45,7 @@ struct RecipeCardView: View {
 
 struct RecipeCardView_Previews: PreviewProvider {
     
-    @State static var recipe: Recipe = Recipe(title: "", description: "", category: .bread, totalAmoountOfFlour: 0, criterion: .grams, scope: .new)
+    @State static var recipe: Recipe = Recipe(title: "", description: "", category: .bread, totalAmountOfFlour: 0, criterion: .grams, scope: .new, ingredients: [])
     @State static var width: CGFloat = 40
     @State static var height: CGFloat = 60
     

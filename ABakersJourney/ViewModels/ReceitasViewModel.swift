@@ -11,55 +11,6 @@ import Combine
 import CloudKit
 
 class ReceitasViewModel: ObservableObject {
-    
-    // MARK: - iCloud Info
-    let container: CKContainer
-    let publicDB: CKDatabase
-    let privateDB: CKDatabase
-    
-    @Published var receitas: [Recipe] {
-        didSet {
-            print("Loaded Recipes")
-        }
-    }
-    
-    init() {
-        self.receitas = []
-        container = CKContainer.default()
-        publicDB = container.publicCloudDatabase
-        privateDB = container.privateCloudDatabase
-        
-    }
-    
-    @objc
-    func refresh(_ completion: @escaping (Error?) -> Void) {
-        let predicate = NSPredicate(value: true)
-        
-        let query = CKQuery(recordType: "Recipe", predicate: predicate)
-        recipes(forQuery: query, completion)
-    }
-    
-    private func recipes(forQuery query: CKQuery, _ completion: @escaping (Error?) -> Void) {
-        publicDB.perform(query, inZoneWith: CKRecordZone.default().zoneID) { [weak self] results, error in
-            guard let self = self else { return }
-
-            if let error = error {
-                DispatchQueue.main.async {
-                    completion(error)
-                }
-                return
-            }
-
-            guard let results = results else { return }
-            self.receitas = results.compactMap {
-                Recipe(record: $0, database: self.publicDB)
-            }
-            let r = self.receitas
-            self.receitas = r
-            self.receitas[0].auxiliarReload.toggle()
-            DispatchQueue.main.async {
-                completion(nil)
-            }
-        }
-    }
+    @Published var receitas: [Recipe] = []
+    @Published var auxBool: Bool = false
 }
