@@ -10,7 +10,7 @@ import Foundation
 import CloudKit
 
 protocol Storable {
-    var recordType: String { get set }
+    var recordType: String { get }
     func parseToRecord<T:Storable>(entity: T) -> CKRecord
     func parseToEntity<T:CKRecord>(record: T) -> Storable
     func retrieveDesiredKeys(recordType: String) -> [String]

@@ -25,7 +25,7 @@ struct RecipeIngredientsFormView: View {
         })
         
         return Section(header: Text("Ingredients")) {
-            TextField("Total de Farinha", text: $receitaViewModel.receita.ingredients[0].amount).keyboardType(.decimalPad)
+            TextField("Total de Farinha", text: $receitaViewModel.receita.totalAmountOfFlour).keyboardType(.decimalPad)
             Picker("", selection: criterion) {
                 ForEach(Criteria.allCases, id: \.self) { c in
                     Text(c.rawValue).tag(c.rawValue)
@@ -34,13 +34,13 @@ struct RecipeIngredientsFormView: View {
             .pickerStyle(SegmentedPickerStyle())
             if self.receitaViewModel.receita.criterion == .grams {
                 List {
-                    ForEach(1..<self.receitaViewModel.receita.ingredients.indices.last! + 1, id: \.self) { i in
+                    ForEach(0..<self.receitaViewModel.receita.ingredients.indices.last! + 1, id: \.self) { i in
                         TextField(self.receitaViewModel.receita.ingredients[i].name, text: self.$receitaViewModel.receita.ingredients[i].amount).keyboardType(.decimalPad)
                     }
                 }
             } else {
                 List {
-                    ForEach(1..<self.receitaViewModel.receita.ingredients.indices.last! + 1, id: \.self) { i in
+                    ForEach(0..<self.receitaViewModel.receita.ingredients.indices.last! + 1, id: \.self) { i in
                         TextField(self.receitaViewModel.receita.ingredients[i].name, text: self.$receitaViewModel.receita.ingredients[i].percentage).keyboardType(.decimalPad)
                     }
                 }
