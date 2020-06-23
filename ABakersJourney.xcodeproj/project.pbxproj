@@ -31,6 +31,10 @@
 		295B89692473648200D532A4 /* RecipeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295B89682473648200D532A4 /* RecipeCardView.swift */; };
 		29D4AC562489CF0300D6BCC3 /* BakersMathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D4AC552489CF0300D6BCC3 /* BakersMathView.swift */; };
 		29DF476D2485483700691AC4 /* ReceitaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DF476C2485483700691AC4 /* ReceitaViewModel.swift */; };
+		29FDD69C249EC0F800331CD1 /* HeaderHomeShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FDD69B249EC0F800331CD1 /* HeaderHomeShape.swift */; };
+		29FDD69E249ECC5100331CD1 /* TestHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FDD69D249ECC5100331CD1 /* TestHeader.swift */; };
+		29FDD6A024A1017A00331CD1 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FDD69F24A1017A00331CD1 /* Utils.swift */; };
+		29FDD6A224A2242300331CD1 /* IngredientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FDD6A124A2242300331CD1 /* IngredientService.swift */; };
 		29FF9BB52497EBEF0073A7DC /* PCloudKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF9BB42497EBEF0073A7DC /* PCloudKitService.swift */; };
 		29FF9BBB249906E60073A7DC /* EntityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF9BBA249906E60073A7DC /* EntityService.swift */; };
 		29FF9BBD24990F5F0073A7DC /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF9BBC24990F5F0073A7DC /* Storable.swift */; };
@@ -64,6 +68,10 @@
 		295B89682473648200D532A4 /* RecipeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCardView.swift; sourceTree = "<group>"; };
 		29D4AC552489CF0300D6BCC3 /* BakersMathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakersMathView.swift; sourceTree = "<group>"; };
 		29DF476C2485483700691AC4 /* ReceitaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceitaViewModel.swift; sourceTree = "<group>"; };
+		29FDD69B249EC0F800331CD1 /* HeaderHomeShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderHomeShape.swift; sourceTree = "<group>"; };
+		29FDD69D249ECC5100331CD1 /* TestHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHeader.swift; sourceTree = "<group>"; };
+		29FDD69F24A1017A00331CD1 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		29FDD6A124A2242300331CD1 /* IngredientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientService.swift; sourceTree = "<group>"; };
 		29FF9BB42497EBEF0073A7DC /* PCloudKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCloudKitService.swift; sourceTree = "<group>"; };
 		29FF9BBA249906E60073A7DC /* EntityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityService.swift; sourceTree = "<group>"; };
 		29FF9BBC24990F5F0073A7DC /* Storable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
@@ -136,8 +144,8 @@
 		291E7EBB2472D0CB0024502D /* ABakersJourney */ = {
 			isa = PBXGroup;
 			children = (
-				29FF9BB12495B0DD0073A7DC /* Services */,
 				290AA678248FE745005CCA12 /* ABakersJourney.entitlements */,
+				29FF9BB12495B0DD0073A7DC /* Services */,
 				290AA671248D6269005CCA12 /* Extensions */,
 				29DF476B2485481E00691AC4 /* ViewModels */,
 				295B896324735D9300D532A4 /* Models */,
@@ -167,6 +175,7 @@
 				29217280248C513000BABEEA /* Criteria.swift */,
 				290AA6A22491456E005CCA12 /* Scope.swift */,
 				290AA6A4249145C2005CCA12 /* RecipeCategory.swift */,
+				29FDD69F24A1017A00331CD1 /* Utils.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -183,9 +192,11 @@
 		295B89602472D3DA00D532A4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				29FDD69A249EBF9000331CD1 /* Shapes */,
 				29D4AC542489CEF100D6BCC3 /* Math */,
 				2913F423247C85B100F377BF /* Recipe */,
 				2913F422247C85A900F377BF /* Ingredient */,
+				29FDD69D249ECC5100331CD1 /* TestHeader.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -220,11 +231,20 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		29FDD69A249EBF9000331CD1 /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				29FDD69B249EC0F800331CD1 /* HeaderHomeShape.swift */,
+			);
+			path = Shapes;
+			sourceTree = "<group>";
+		};
 		29FF9BB12495B0DD0073A7DC /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				29FF9BB42497EBEF0073A7DC /* PCloudKitService.swift */,
 				29FF9BBA249906E60073A7DC /* EntityService.swift */,
+				29FDD6A124A2242300331CD1 /* IngredientService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -301,9 +321,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				295B89622473421500D532A4 /* CreateRecipeView.swift in Sources */,
+				29FDD69E249ECC5100331CD1 /* TestHeader.swift in Sources */,
 				29FF9BBB249906E60073A7DC /* EntityService.swift in Sources */,
 				2913F425247C85CD00F377BF /* CreateIngredientView.swift in Sources */,
+				29FDD6A224A2242300331CD1 /* IngredientService.swift in Sources */,
 				290AA673248D6278005CCA12 /* BindingExtension.swift in Sources */,
+				29FDD6A024A1017A00331CD1 /* Utils.swift in Sources */,
 				290AA6A32491456E005CCA12 /* Scope.swift in Sources */,
 				291E7EBD2472D0CB0024502D /* AppDelegate.swift in Sources */,
 				29FF9BBD24990F5F0073A7DC /* Storable.swift in Sources */,
@@ -311,6 +334,7 @@
 				295B89692473648200D532A4 /* RecipeCardView.swift in Sources */,
 				295B07F62474206800A6C57C /* Ingredient.swift in Sources */,
 				29DF476D2485483700691AC4 /* ReceitaViewModel.swift in Sources */,
+				29FDD69C249EC0F800331CD1 /* HeaderHomeShape.swift in Sources */,
 				295B89672473645D00D532A4 /* RecipesView.swift in Sources */,
 				29434CAE247AEE38008EDFA2 /* RecipeSummaryView.swift in Sources */,
 				291E7EBF2472D0CB0024502D /* SceneDelegate.swift in Sources */,

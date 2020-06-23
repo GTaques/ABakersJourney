@@ -60,7 +60,7 @@ struct CreateIngredientView: View {
                     self.receitaViewModel.receita = self.receitaViewModel.receita
                     self.showingCreateIngredient.toggle()
                 }) {
-                    Text("Save")
+                    Text("Adicionar")
             })
         }
     }

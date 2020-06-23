@@ -11,15 +11,16 @@ import SwiftUI
 struct ContentView: View {
     
 //    @EnvironmentObject var receitasViewModel: ReceitasViewModel 
+    @ObservedObject var receitasViewModel: ReceitasViewModel = ReceitasViewModel()
     
     var body: some View {
         TabView {
-            RecipesView()
+            RecipesView(receitasViewModel: receitasViewModel)
                 .tabItem {
                     Image(systemName: "book.fill")
                     Text("Receitas")
             }
-            CreateRecipeView()
+            CreateRecipeView(receitasViewModel: receitasViewModel)
                 .tabItem {
                     Image(systemName: "plus.square.fill")
                     Text("Criar Receita")

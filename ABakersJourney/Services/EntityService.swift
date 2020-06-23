@@ -23,7 +23,11 @@ struct EntityService: PCloudKitService {
                     completion(.failure(CloudKitErrorHelper.recordFailure))
                     return
                 }
-                let element: Result<T, Error> = .success(item)
+//                let id = record?.recordID
+                let test = item.parseToEntity(record: record!) as! T
+                let element: Result<T, Error> = .success(test)
+//                CKModifyRecordsOperation(recordsToSave:, recordIDsToDelete: <#T##[CKRecord.ID]?#>)
+                print(record?.recordID)
                 completion(element)
             }
         }
@@ -42,6 +46,7 @@ struct EntityService: PCloudKitService {
             DispatchQueue.main.async {
                 let _ = record.recordID
                 let item = entity.parseToEntity(record: record)
+                
                 completion(.success(item))
             }
         }

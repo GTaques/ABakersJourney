@@ -17,8 +17,8 @@ class ReceitaViewModel: ObservableObject {
     }
     
     init() {
-        self.receita = Recipe(title: "", description: "", category: .bread, totalAmountOfFlour: 0, criterion: .grams, scope: .new, ingredients: [
-            Ingredient(category: .Dough, name: "Farinha", amount: "", percentage: "", isFarinha: true),
+        self.receita = Recipe(title: "", description: "", category: .bread, totalAmountOfFlour: "", criterion: .grams, scope: .new, ingredients: [
+            Ingredient(category: .Dough, name: "Farinha Branca", amount: "", percentage: "", isFarinha: true),
             Ingredient(category: .Dough, name: "Água", amount: "", percentage: "", isFarinha: false),
             Ingredient(category: .Dough, name: "Levain", amount: "", percentage: "", isFarinha: false),
             Ingredient(category: .Dough, name: "Salt", amount: "", percentage: "", isFarinha: false),
