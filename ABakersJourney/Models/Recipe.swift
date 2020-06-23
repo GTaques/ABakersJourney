@@ -14,7 +14,7 @@ import CloudKit
 class Recipe: Identifiable {
     static let recordType = "Recipe"
     let id = UUID()
-    private var recordId: CKRecord.ID?
+    var recordId: CKRecord.ID?
     var title: String
     var description: String
     var database: CKDatabase?
@@ -36,12 +36,13 @@ class Recipe: Identifiable {
         self.ingredients = []
     }
     
-    init(title: String, description: String, category: RecipeCategory, totalAmountOfFlour: String, criterion: Criteria, scope: Scope, ingredients: [Ingredient] = [
+    init(recordId: CKRecord.ID = CKRecord.ID(), title: String, description: String, category: RecipeCategory, totalAmountOfFlour: String, criterion: Criteria, scope: Scope, ingredients: [Ingredient] = [
         Ingredient(category: .Dough, name: "Farinha", amount: "0", percentage: "0", isFarinha: true),
         Ingredient(category: .Dough, name: "Água", amount: "0", percentage: "0", isFarinha: false),
         Ingredient(category: .Dough, name: "Levain", amount: "0", percentage: "0", isFarinha: false),
         Ingredient(category: .Dough, name: "Salt", amount: "0", percentage: "0", isFarinha: false),
         ]) {
+        self.recordId = recordId
         self.title = title
         self.description = description
         self.category = category
@@ -96,11 +97,11 @@ extension Recipe: Storable {
     }
     
     func parseToEntity<T>(record: T) -> Storable where T : CKRecord {
-        //        let recordID = record.recordID
+        let recordId = record.recordID
         let title = record["title"]
         let description = record["title"]
         
-        return Recipe(title: title as! String, description: description as! String, category: .bread, totalAmountOfFlour: "",  criterion: .grams, scope: .new)
+        return Recipe(recordId: recordId, title: title as! String, description: description as! String, category: .bread, totalAmountOfFlour: "",  criterion: .grams, scope: .new)
     }
     
     func retrieveDesiredKeys(recordType: String) -> [String] {

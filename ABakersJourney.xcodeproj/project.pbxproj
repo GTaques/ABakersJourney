@@ -34,6 +34,7 @@
 		29FDD69C249EC0F800331CD1 /* HeaderHomeShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FDD69B249EC0F800331CD1 /* HeaderHomeShape.swift */; };
 		29FDD69E249ECC5100331CD1 /* TestHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FDD69D249ECC5100331CD1 /* TestHeader.swift */; };
 		29FDD6A024A1017A00331CD1 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FDD69F24A1017A00331CD1 /* Utils.swift */; };
+		29FDD6A224A2242300331CD1 /* IngredientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FDD6A124A2242300331CD1 /* IngredientService.swift */; };
 		29FF9BB52497EBEF0073A7DC /* PCloudKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF9BB42497EBEF0073A7DC /* PCloudKitService.swift */; };
 		29FF9BBB249906E60073A7DC /* EntityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF9BBA249906E60073A7DC /* EntityService.swift */; };
 		29FF9BBD24990F5F0073A7DC /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF9BBC24990F5F0073A7DC /* Storable.swift */; };
@@ -70,6 +71,7 @@
 		29FDD69B249EC0F800331CD1 /* HeaderHomeShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderHomeShape.swift; sourceTree = "<group>"; };
 		29FDD69D249ECC5100331CD1 /* TestHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHeader.swift; sourceTree = "<group>"; };
 		29FDD69F24A1017A00331CD1 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		29FDD6A124A2242300331CD1 /* IngredientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientService.swift; sourceTree = "<group>"; };
 		29FF9BB42497EBEF0073A7DC /* PCloudKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCloudKitService.swift; sourceTree = "<group>"; };
 		29FF9BBA249906E60073A7DC /* EntityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityService.swift; sourceTree = "<group>"; };
 		29FF9BBC24990F5F0073A7DC /* Storable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 			children = (
 				29FF9BB42497EBEF0073A7DC /* PCloudKitService.swift */,
 				29FF9BBA249906E60073A7DC /* EntityService.swift */,
+				29FDD6A124A2242300331CD1 /* IngredientService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				29FDD69E249ECC5100331CD1 /* TestHeader.swift in Sources */,
 				29FF9BBB249906E60073A7DC /* EntityService.swift in Sources */,
 				2913F425247C85CD00F377BF /* CreateIngredientView.swift in Sources */,
+				29FDD6A224A2242300331CD1 /* IngredientService.swift in Sources */,
 				290AA673248D6278005CCA12 /* BindingExtension.swift in Sources */,
 				29FDD6A024A1017A00331CD1 /* Utils.swift in Sources */,
 				290AA6A32491456E005CCA12 /* Scope.swift in Sources */,

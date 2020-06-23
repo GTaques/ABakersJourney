@@ -7,10 +7,11 @@
 //
 
 import SwiftUI
+import CloudKit
 
 struct CreateRecipeView: View {
     
-    @EnvironmentObject var receitasViewModel: ReceitasViewModel
+    @ObservedObject var receitasViewModel: ReceitasViewModel
     @ObservedObject var receitaViewModel: ReceitaViewModel = ReceitaViewModel()
     
     @State var showingCreateIngredient: Bool = false
@@ -56,7 +57,10 @@ struct CreateRecipeView: View {
                     EntityService.save(item: self.receitaViewModel.receita) { (result) in
                         switch result {
                         case .success(let newItem):
-                            self.receitasViewModel.receitas.append(newItem)
+//                            self.receitasViewModel.receitas.append(newItem)
+                            IngredientService.bulkSave(items: self.receitaViewModel.receita.ingredients, parentEntity: self.receitaViewModel.receita) { result in
+                                
+                            }
                             print("saved")
                         case .failure(let err):
                             print(err.localizedDescription)
@@ -78,7 +82,8 @@ struct CreateRecipeView: View {
 }
 
 struct CreateRecipeView_Previews: PreviewProvider {
+    static var receitasViewModel = ReceitasViewModel()
     static var previews: some View {
-        CreateRecipeView()
+        CreateRecipeView(receitasViewModel: receitasViewModel)
     }
 }
