@@ -7,14 +7,18 @@
 //
 
 import SwiftUI
+import CloudKit
 
 struct CreateRecipeView: View {
     
-    @EnvironmentObject var receitasViewModel: ReceitasViewModel
+    @ObservedObject var receitasViewModel: ReceitasViewModel
     @ObservedObject var receitaViewModel: ReceitaViewModel = ReceitaViewModel()
     
     @State var showingCreateIngredient: Bool = false
+    @State var showingActionSheet: Bool = false
     @State var isEditMode: Bool = true
+    @State var sourceType: SourceType?
+    
     
     var steps: [String] = ["Ativar Fermento", "Autólise", "Adicionar Levain", "Adicionar Sal", "Laminação", "Dobra #1", "Dobra #2", "Dobra #3", "Modelagem"]
     
@@ -27,6 +31,21 @@ struct CreateRecipeView: View {
                         Section(header: Text("Informações Básicas")) {
                             TextField("Nome", text: self.$receitaViewModel.receita.title)
                             TextField("Descrição", text: self.$receitaViewModel.receita.description)
+                            Button(action: {
+                                self.showingActionSheet = true
+                            }) {
+                                Text("Adicionar Imagem")
+                            }.actionSheet(isPresented: self.$showingActionSheet) {
+                                ActionSheet(title: Text("Adicionar Imagem"), buttons: [
+                                    ActionSheet.Button.default(Text("Tirar Foto"), action: {
+                                        self.sourceType = .camera
+                                    }),
+                                    ActionSheet.Button.default(Text("Escolher Foto"), action: {
+                                        self.sourceType = .library
+                                    }),
+                                    .cancel()
+                                ])
+                            }
                         }
                         RecipeIngredientsFormView(receitaViewModel: self.receitaViewModel, criterion: self.$receitaViewModel.receita.criterion, showingCreateIngredient: self.showingCreateIngredient)
                     }.frame(width: geometry.size.width, height: geometry.size.height * 0.7)
@@ -38,13 +57,16 @@ struct CreateRecipeView: View {
                     EntityService.save(item: self.receitaViewModel.receita) { (result) in
                         switch result {
                         case .success(let newItem):
-                            self.receitasViewModel.receitas.append(newItem)
+//                            self.receitasViewModel.receitas.append(newItem)
+                            IngredientService.bulkSave(items: self.receitaViewModel.receita.ingredients, parentEntity: self.receitaViewModel.receita) { result in
+                                
+                            }
                             print("saved")
                         case .failure(let err):
                             print(err.localizedDescription)
                         }
                     }
-                    self.receitaViewModel.receita = Recipe(title: "", description: "", category: .bread, totalAmountOfFlour: 0, criterion: .grams, scope: .new)
+                    self.receitaViewModel.receita = Recipe(title: "", description: "", category: .bread, totalAmountOfFlour: "", criterion: .grams, scope: .new)
                 }
                 print("Saved")
             }) { Text("Save")
@@ -60,7 +82,8 @@ struct CreateRecipeView: View {
 }
 
 struct CreateRecipeView_Previews: PreviewProvider {
+    static var receitasViewModel = ReceitasViewModel()
     static var previews: some View {
-        CreateRecipeView()
+        CreateRecipeView(receitasViewModel: receitasViewModel)
     }
 }

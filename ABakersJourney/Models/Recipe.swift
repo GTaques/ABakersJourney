@@ -14,13 +14,13 @@ import CloudKit
 class Recipe: Identifiable {
     static let recordType = "Recipe"
     let id = UUID()
-    private var recordId: CKRecord.ID?
+    var recordId: CKRecord.ID?
     var title: String
     var description: String
     var database: CKDatabase?
     var category: RecipeCategory
     var coverImage: CKAsset?
-    var totalAmountOfFlour: Double
+    var totalAmountOfFlour: String
     var criterion: Criteria
     var imageName: String?
     var scope: Scope
@@ -30,18 +30,19 @@ class Recipe: Identifiable {
         self.title = ""
         self.description = ""
         self.category = .bread
-        self.totalAmountOfFlour = 0
+        self.totalAmountOfFlour = ""
         self.criterion = .grams
         self.scope = .new
         self.ingredients = []
     }
     
-    init(title: String, description: String, category: RecipeCategory, totalAmountOfFlour: Double, criterion: Criteria, scope: Scope, ingredients: [Ingredient] = [
+    init(recordId: CKRecord.ID = CKRecord.ID(), title: String, description: String, category: RecipeCategory, totalAmountOfFlour: String, criterion: Criteria, scope: Scope, ingredients: [Ingredient] = [
         Ingredient(category: .Dough, name: "Farinha", amount: "0", percentage: "0", isFarinha: true),
         Ingredient(category: .Dough, name: "Água", amount: "0", percentage: "0", isFarinha: false),
         Ingredient(category: .Dough, name: "Levain", amount: "0", percentage: "0", isFarinha: false),
         Ingredient(category: .Dough, name: "Salt", amount: "0", percentage: "0", isFarinha: false),
         ]) {
+        self.recordId = recordId
         self.title = title
         self.description = description
         self.category = category
@@ -52,35 +53,29 @@ class Recipe: Identifiable {
     }
     
     func calculatePercentages(criterion: Criteria) {
-        self.totalAmountOfFlour = 0
-        for ing in ingredients.filter({$0.isFarinha == true}) {
-            if !ing.amount.isEmpty {
-                self.totalAmountOfFlour += Double(ing.amount)!
-            }
-        }
-        switch criterion {
-        case .grams:
-            // CHECK-LATER: Used filter before but I couldn't seem to find a fix for when the value is empty. Summary would not update
-            // for ing in ingredients.filter({!$0.amount.isEmpty}) {}
-            for ing in ingredients {
-                if ing.amount.isEmpty {
-                    ing.percentage = ""
-                } else {
-                    ing.percentage = String(format: "%.1f", Double(ing.amount)! * 100 / self.totalAmountOfFlour)
+        if !self.totalAmountOfFlour.isEmpty {
+            switch criterion {
+            case .grams:
+                // CHECK-LATER: Used filter before but I couldn't seem to find a fix for when the value is empty. Summary would not update
+                // for ing in ingredients.filter({!$0.amount.isEmpty}) {}
+                for ing in ingredients {
+                    if ing.amount.isEmpty {
+                        ing.percentage = ""
+                    } else {
+                        ing.percentage = String(format: "%.1f", Double(ing.amount)! * 100 / Double(self.totalAmountOfFlour)!)
+                    }
                 }
-            }
-            break
-        case .percentage:
-            for ing in ingredients {
-                if ing.percentage.isEmpty {
-                    ing.amount = ""
-                } else {
-                    ing.amount = String(format: "%.0f", Double(ing.percentage)! * self.totalAmountOfFlour / 100)
+                break
+            case .percentage:
+                for ing in ingredients {
+                    if ing.percentage.isEmpty {
+                        ing.amount = ""
+                    } else {
+                        ing.amount = String(format: "%.0f", Double(ing.percentage)! * Double(self.totalAmountOfFlour)! / 100)
+                    }
                 }
+                break
             }
-            break
-        default:
-            break
         }
     }
 }
@@ -89,9 +84,6 @@ extension Recipe: Storable {
     var recordType: String {
         get {
             return "Recipe"
-        }
-        set {
-            recordType = "Recipe"
         }
     }
     
@@ -105,11 +97,11 @@ extension Recipe: Storable {
     }
     
     func parseToEntity<T>(record: T) -> Storable where T : CKRecord {
-        //        let recordID = record.recordID
+        let recordId = record.recordID
         let title = record["title"]
         let description = record["title"]
         
-        return Recipe(title: title as! String, description: description as! String, category: .bread, totalAmountOfFlour: 0, criterion: .grams, scope: .new)
+        return Recipe(recordId: recordId, title: title as! String, description: description as! String, category: .bread, totalAmountOfFlour: "",  criterion: .grams, scope: .new)
     }
     
     func retrieveDesiredKeys(recordType: String) -> [String] {

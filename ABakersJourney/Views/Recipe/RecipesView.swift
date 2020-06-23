@@ -11,7 +11,7 @@ import Combine
 
 struct RecipesView: View {
     
-    @ObservedObject var receitasViewModel: ReceitasViewModel = ReceitasViewModel()
+    @ObservedObject var receitasViewModel: ReceitasViewModel
     var recipe: Recipe = Recipe()
     
     var body: some View {
@@ -107,7 +107,8 @@ struct RecipesView: View {
 }
 
 struct RecipesView_Previews: PreviewProvider {
+    static var receitasViewModel = ReceitasViewModel()
     static var previews: some View {
-        RecipesView()
+        RecipesView(receitasViewModel: receitasViewModel)
     }
 }
