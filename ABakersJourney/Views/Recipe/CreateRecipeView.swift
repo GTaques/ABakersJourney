@@ -56,8 +56,7 @@ struct CreateRecipeView: View {
                 if !self.receitaViewModel.receita.title.isEmpty {
                     EntityService.save(item: self.receitaViewModel.receita) { (result) in
                         switch result {
-                        case .success(let newItem):
-//                            self.receitasViewModel.receitas.append(newItem)
+                        case .success( _):
                             IngredientService.bulkSave(items: self.receitaViewModel.receita.ingredients, parentEntity: self.receitaViewModel.receita) { result in
                                 
                             }

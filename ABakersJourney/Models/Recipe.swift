@@ -11,7 +11,7 @@ import Combine
 import UIKit
 import CloudKit
 
-class Recipe: Identifiable {
+struct Recipe: Identifiable {
     static let recordType = "Recipe"
     let id = UUID()
     var recordId: CKRecord.ID?
