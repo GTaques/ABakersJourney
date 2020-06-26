@@ -98,7 +98,11 @@ struct RecipesView: View {
             case .success(let newItem):
                 recipesArray.append(newItem as! Recipe)
                 self.receitasViewModel.receitas = recipesArray
-                self.receitasViewModel.auxBool.toggle()
+                if !self.receitasViewModel.receitas.isEmpty {
+                    self.receitasViewModel.receitas[0].scope = .new
+                    print("Loaded Recipes!")
+                }
+                
             case .failure(let err):
                 print(err.localizedDescription)
             }
