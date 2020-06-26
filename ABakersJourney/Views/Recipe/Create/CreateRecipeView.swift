@@ -16,8 +16,10 @@ struct CreateRecipeView: View {
     
     @State var showingCreateIngredient: Bool = false
     @State var showingActionSheet: Bool = false
+    @State var showingImagePicker: Bool = false
     @State var isEditMode: Bool = true
-    @State var sourceType: SourceType?
+    @State var sourceType: SourceType = .camera
+    @State var image: UIImage?
     
     
     var steps: [String] = ["Ativar Fermento", "Autólise", "Adicionar Levain", "Adicionar Sal", "Laminação", "Dobra #1", "Dobra #2", "Dobra #3", "Modelagem"]
@@ -26,7 +28,7 @@ struct CreateRecipeView: View {
         NavigationView {
             GeometryReader { geometry in
                 VStack {
-                    RecipeSummaryView(receitaViewModel: self.receitaViewModel).frame(width: geometry.size.width, height: geometry.size.height * 0.3)
+                    RecipeSummaryView(receitaViewModel: self.receitaViewModel, headerImage: self.$image).frame(width: geometry.size.width, height: geometry.size.height * 0.3)
                     Form {
                         Section(header: Text("Informações Básicas")) {
                             TextField("Nome", text: self.$receitaViewModel.receita.title)
@@ -39,12 +41,16 @@ struct CreateRecipeView: View {
                                 ActionSheet(title: Text("Adicionar Imagem"), buttons: [
                                     ActionSheet.Button.default(Text("Tirar Foto"), action: {
                                         self.sourceType = .camera
+                                        self.showingImagePicker = true
                                     }),
                                     ActionSheet.Button.default(Text("Escolher Foto"), action: {
                                         self.sourceType = .library
+                                        self.showingImagePicker = true
                                     }),
                                     .cancel()
                                 ])
+                            }.sheet(isPresented: self.$showingImagePicker) {
+                                ImagePicker(image: self.$image, source: self.$sourceType)
                             }
                         }
                         RecipeIngredientsFormView(receitaViewModel: self.receitaViewModel, criterion: self.$receitaViewModel.receita.criterion, showingCreateIngredient: self.showingCreateIngredient)
@@ -68,17 +74,17 @@ struct CreateRecipeView: View {
                     self.receitaViewModel.receita = Recipe(title: "", description: "", category: .bread, totalAmountOfFlour: "", criterion: .grams, scope: .new)
                 }
                 print("Saved")
-            }) { Text("Save")
-            })
-            .gesture(DragGesture().onChanged{_ in UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)})
-                
+            }) {
+                Text("Save")
+            }).gesture(DragGesture().onChanged{_ in UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)})
         }
     }
-    
-    func delete(at offsets: IndexSet) {
-        print("delete")
-    }
 }
+
+func delete(at offsets: IndexSet) {
+    print("delete")
+}
+
 
 struct CreateRecipeView_Previews: PreviewProvider {
     static var receitasViewModel = ReceitasViewModel()
