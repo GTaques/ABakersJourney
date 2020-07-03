@@ -7,50 +7,52 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct RecipeCardView: View {
     
-    @Binding var recipe: Recipe
+    var recipe: Recipe
     var width: CGFloat
     var height: CGFloat
     
     var body: some View {
         ZStack {
-
-            Image(recipe.imageName ?? "pao1")
-                .resizable()
-                .scaledToFill()
-                .frame(width: width, height: height)
-                .overlay(Rectangle().cornerRadius(8).foregroundColor(.black).opacity(0.5))
-                .clipShape(RoundedRectangle(cornerRadius: 8))
+            
+            Image(recipe.title ?? "pao1")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: width, height: height)
+                    .overlay(Rectangle().cornerRadius(8).foregroundColor(.black).opacity(0.5))
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
                 
                 
-            VStack(alignment: .leading) {
-                Text(recipe.title)
-                .font(Font.title)
-                    .fontWeight(.medium).foregroundColor(.white)
-                HStack {
+                VStack(alignment: .leading) {
+                    Text(recipe.title)
+                        .font(Font.title)
+                        .fontWeight(.medium).foregroundColor(.white)
                     HStack {
-                        Image(systemName: "timer")
-                        Text("~26h")
+                        HStack {
+                            Image(systemName: "timer")
+                            Text("~26h")
+                        }
+                        
                     }
-                    
                 }
-            }
-            .foregroundColor(.white)
+                .foregroundColor(.white)
+            
+            
         }
-       
+        
     }
 }
 
-struct RecipeCardView_Previews: PreviewProvider {
-    
-    @State static var recipe: Recipe = Recipe(title: "", description: "", category: .bread, totalAmountOfFlour: "", criterion: .grams, scope: .new, ingredients: [])
-    @State static var width: CGFloat = 40
-    @State static var height: CGFloat = 60
-    
-    
-    static var previews: some View {
-        RecipeCardView(recipe: $recipe, width: width, height: height)
-    }
-}
+//struct RecipeCardView_Previews: PreviewProvider {
+//    
+//    @State static var width: CGFloat = 40
+//    @State static var height: CGFloat = 60
+//    
+//    
+//    static var previews: some View {
+//        RecipeCardView(recipe: $nil, width: width, height: height)
+//    }
+//}

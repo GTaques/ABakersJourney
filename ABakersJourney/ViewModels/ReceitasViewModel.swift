@@ -8,9 +8,12 @@
 
 import SwiftUI
 import Combine
-import CloudKit
+import CoreData
 
 class ReceitasViewModel: ObservableObject {
+    
     @Published var receitas: [Recipe] = []
     @Published var auxBool: Bool = false
+    
 }
+
