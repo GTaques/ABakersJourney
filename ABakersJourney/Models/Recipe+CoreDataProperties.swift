@@ -17,11 +17,12 @@ extension Recipe {
 //        return NSFetchRequest<Recipe>(entityName: "Recipe")
 //    }
 
-    @NSManaged public var title: String
+    @NSManaged public var title: String?
     @NSManaged public var description_: String?
     @NSManaged public var createdAt: Date?
     @NSManaged public var totalAmountOfFlour: String?
-    @NSManaged public var ingredient: NSSet?
+    @NSManaged public var ingredients: NSSet?
+   
     
     public var wrappedTitle: String {
         title ?? "No Title"
@@ -41,12 +42,13 @@ extension Recipe {
     
     public var ingredientArray: [Ingredient] {
         get {
-            let set = ingredient as? Set<Ingredient> ?? []
+            let set = ingredients as? Set<Ingredient> ?? []
             
             return set.sorted {
                 $0.wrappedName < $1.wrappedName
             }
         }
+        set {}
     }
 
 }
@@ -76,3 +78,4 @@ extension Recipe {
     }
 
 }
+

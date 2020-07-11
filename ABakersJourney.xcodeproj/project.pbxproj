@@ -13,6 +13,9 @@
 		290AA67B248FE771005CCA12 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 290AA67A248FE771005CCA12 /* CloudKit.framework */; };
 		290AA6A32491456E005CCA12 /* Scope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290AA6A22491456E005CCA12 /* Scope.swift */; };
 		290AA6A5249145C2005CCA12 /* RecipeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290AA6A4249145C2005CCA12 /* RecipeCategory.swift */; };
+		290CAC8824B7BE6C00A3BBB6 /* DetailsRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290CAC8724B7BE6C00A3BBB6 /* DetailsRecipe.swift */; };
+		290CAC8B24B8C10A00A3BBB6 /* IngredientObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290CAC8A24B8C10A00A3BBB6 /* IngredientObject.swift */; };
+		290CAC8D24B8C27500A3BBB6 /* RecipeObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290CAC8C24B8C27500A3BBB6 /* RecipeObject.swift */; };
 		2913F425247C85CD00F377BF /* CreateIngredientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2913F424247C85CD00F377BF /* CreateIngredientView.swift */; };
 		2913F427247C91B800F377BF /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2913F426247C91B800F377BF /* Shared.swift */; };
 		2913F429247C9B1500F377BF /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2913F428247C9B1500F377BF /* ImageHelper.swift */; };
@@ -54,6 +57,9 @@
 		290AA67A248FE771005CCA12 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		290AA6A22491456E005CCA12 /* Scope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scope.swift; sourceTree = "<group>"; };
 		290AA6A4249145C2005CCA12 /* RecipeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCategory.swift; sourceTree = "<group>"; };
+		290CAC8724B7BE6C00A3BBB6 /* DetailsRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsRecipe.swift; sourceTree = "<group>"; };
+		290CAC8A24B8C10A00A3BBB6 /* IngredientObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientObject.swift; sourceTree = "<group>"; };
+		290CAC8C24B8C27500A3BBB6 /* RecipeObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeObject.swift; sourceTree = "<group>"; };
 		2913F424247C85CD00F377BF /* CreateIngredientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIngredientView.swift; sourceTree = "<group>"; };
 		2913F426247C91B800F377BF /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
 		2913F428247C9B1500F377BF /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
@@ -117,6 +123,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		290CAC8624B7BE0A00A3BBB6 /* Detaiils */ = {
+			isa = PBXGroup;
+			children = (
+				290CAC8724B7BE6C00A3BBB6 /* DetailsRecipe.swift */,
+			);
+			path = Detaiils;
+			sourceTree = "<group>";
+		};
+		290CAC8924B8C0D300A3BBB6 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				290CAC8A24B8C10A00A3BBB6 /* IngredientObject.swift */,
+				290CAC8C24B8C27500A3BBB6 /* RecipeObject.swift */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
 		2913F422247C85A900F377BF /* Ingredient */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +151,7 @@
 		2913F423247C85B100F377BF /* Recipe */ = {
 			isa = PBXGroup;
 			children = (
+				290CAC8624B7BE0A00A3BBB6 /* Detaiils */,
 				2994991E24A67E4A00F31E94 /* Create */,
 				295B89662473645D00D532A4 /* RecipesView.swift */,
 				295B89682473648200D532A4 /* RecipeCardView.swift */,
@@ -213,6 +237,7 @@
 		295B896324735D9300D532A4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				290CAC8924B8C0D300A3BBB6 /* Objects */,
 				2973653024A80C7700DD26A6 /* Ingredient+CoreDataClass.swift */,
 				2973653124A80C7700DD26A6 /* Ingredient+CoreDataProperties.swift */,
 				2973653224A80C7700DD26A6 /* Recipe+CoreDataClass.swift */,
@@ -348,14 +373,17 @@
 				29DF476D2485483700691AC4 /* ReceitaViewModel.swift in Sources */,
 				2973653724A80C7700DD26A6 /* Recipe+CoreDataProperties.swift in Sources */,
 				295B89672473645D00D532A4 /* RecipesView.swift in Sources */,
+				290CAC8824B7BE6C00A3BBB6 /* DetailsRecipe.swift in Sources */,
 				29434CAE247AEE38008EDFA2 /* RecipeSummaryView.swift in Sources */,
 				2953FF9A24AEAD2A00E890DB /* CoreDataService.swift in Sources */,
 				2942A0E524A4035F00C03FBE /* ImagePicker.swift in Sources */,
+				290CAC8B24B8C10A00A3BBB6 /* IngredientObject.swift in Sources */,
 				291E7EBF2472D0CB0024502D /* SceneDelegate.swift in Sources */,
 				29FF9BB52497EBEF0073A7DC /* PCloudKitService.swift in Sources */,
 				29217281248C513000BABEEA /* Criteria.swift in Sources */,
 				290AA677248EEB52005CCA12 /* ReceitasViewModel.swift in Sources */,
 				2973653524A80C7700DD26A6 /* Ingredient+CoreDataProperties.swift in Sources */,
+				290CAC8D24B8C27500A3BBB6 /* RecipeObject.swift in Sources */,
 				2913F427247C91B800F377BF /* Shared.swift in Sources */,
 				291E7EC12472D0CB0024502D /* ContentView.swift in Sources */,
 				2913F429247C9B1500F377BF /* ImageHelper.swift in Sources */,

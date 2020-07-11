@@ -27,7 +27,7 @@ struct EntityService: PCloudKitService {
                 let test = item.parseToEntity(record: record!) as! T
                 let element: Result<T, Error> = .success(test)
 //                CKModifyRecordsOperation(recordsToSave:, recordIDsToDelete: <#T##[CKRecord.ID]?#>)
-                print(record?.recordID)
+//                print(record?.recordID)
                 completion(element)
             }
         }

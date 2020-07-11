@@ -11,9 +11,9 @@ import SwiftUI
 struct CreateIngredientView: View {
     
     @ObservedObject var receitaViewModel: ReceitaViewModel
-    @State var ingredient: MockIngredient = MockIngredient(name: "", amount: "", percentage: "", isFarinha: false)
     
-    @Binding var ingredients: [MockIngredient]
+    @State var ingredient: IngredientObject = IngredientObject(isFarinha: false, name: "", amount: "", percentage: "")
+    
     @Binding var showingCreateIngredient: Bool
     @Binding var criterion: Criteria
     
@@ -68,12 +68,12 @@ struct CreateIngredientView: View {
 struct CreateIngredientView_Previews: PreviewProvider {
     
     @State static var showingView: Bool = false
-    @State static var ingredients: [MockIngredient] = []
-    @State static var ingredient: MockIngredient = MockIngredient(name: "", amount: "", percentage: "", isFarinha: true)
+//    @State static var ingredients: [MockIngredient] = []
+//    @State static var ingredient: MockIngredient = MockIngredient(name: "", amount: "", percentage: "", isFarinha: true)
     @State static var receitaVM: ReceitaViewModel = ReceitaViewModel()
     @State static var criterion: Criteria = .grams
     
     static var previews: some View {
-        CreateIngredientView(receitaViewModel: receitaVM, ingredient: ingredient, ingredients: $ingredients, showingCreateIngredient: $showingView, criterion: $criterion)
+        CreateIngredientView(receitaViewModel: receitaVM, showingCreateIngredient: $showingView, criterion: $criterion)
     }
 }

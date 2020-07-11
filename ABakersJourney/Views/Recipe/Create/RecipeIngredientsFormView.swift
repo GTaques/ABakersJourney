@@ -16,13 +16,13 @@ struct RecipeIngredientsFormView: View {
     
     
     var body: some View {
-        let criterion = Binding<Criteria>(get: {
+//        let criterion = Binding<Criteria>(get: {
 //            return self.receitaViewModel.receita.criterion
-            return .grams
-        }, set: {
+//            return .grams
+//        }, set: {
 //            self.receitaViewModel.receita.criterion = $0
-            self.criterion = $0
-        })
+//            self.criterion = $0
+//        })
         
         return Section(header: Text("Ingredients")) {
 //            TextField("Total de Farinha", text: $receitaViewModel.receita.totalAmountOfFlour).keyboardType(.decimalPad)

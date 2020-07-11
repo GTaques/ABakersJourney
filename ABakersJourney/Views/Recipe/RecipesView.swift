@@ -11,9 +11,7 @@ import Combine
 
 struct RecipesView: View {
     
-    @Environment(\.managedObjectContext) var managedObjectContext
     @ObservedObject var receitasViewModel: ReceitasViewModel = ReceitasViewModel()
-    @FetchRequest(entity: Recipe.entity(), sortDescriptors: []) var recipes : FetchedResults<Recipe>
     
     var body: some View {
         NavigationView {
@@ -25,30 +23,16 @@ struct RecipesView: View {
                                 Text("Newest").bold().font(.title)
                                 Spacer()
                                 Button(action: {
-                                    let ingredient1 = Ingredient(context: self.managedObjectContext)
-                                    ingredient1.isFarinha = true
-                                    ingredient1.amount = "200"
-                                    ingredient1.percentage = "100"
-                                    ingredient1.belongsTo = Recipe(context: self.managedObjectContext)
-                                    ingredient1.name = "Farinha"
-                                    
-                                    let ingredient2 = Ingredient(context: self.managedObjectContext)
-                                    ingredient2.isFarinha = true
-                                    ingredient2.amount = "200"
-                                    ingredient2.percentage = "100"
-                                    ingredient2.belongsTo = Recipe(context: self.managedObjectContext)
-                                    ingredient2.name = "Agua"
-                                    
-                                    print("Added object")
-                                    try? self.managedObjectContext.save()
                                 }) {
                                     Text("Ver Mais")
                                 }
                             }.padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 15))
                             ScrollView(.horizontal) {
                                 HStack {
-                                    ForEach(self.recipes , id: \.self) { recipe in
-                                        RecipeCardView(recipe: recipe, width: geometry.size.width * 0.38, height: geometry.size.width * 0.32).frame(width: geometry.size.width * 0.38, height: geometry.size.width * 0.32)
+                                    ForEach(self.receitasViewModel.recipes.indices , id: \.self) { i in
+                                        NavigationLink(destination: DetailsRecipe(recipe: self.receitasViewModel.recipes[i])) {
+                                            RecipeCardView(recipe: self.receitasViewModel.recipes[i], width: geometry.size.width * 0.38, height: geometry.size.width * 0.32).frame(width: geometry.size.width * 0.38, height: geometry.size.width * 0.32)
+                                        }
                                     }
                                 }
                             }
@@ -62,6 +46,17 @@ struct RecipesView: View {
     }
     
     func loadRecipes() {
+        CoreDataService.shared.getRecipes(predicate: nil, completion: { recipes in
+            self.receitasViewModel.recipes = recipes
+            print("Recipes: \(self.receitasViewModel.recipes)")
+            if self.receitasViewModel.recipes.count > 0 {
+                CoreDataService.shared.getIngredients(predicate: NSPredicate(format: "belongsTo == %@", self.receitasViewModel.recipes[0].objectID)) { ingredients in
+                    print(ingredients)
+                }
+            }
+        })
+        
+        
         //        var recipesArray = [Recipe]()
 //        EntityService.fetch(entity: recipe) { (result) in
 //            switch result {

@@ -18,4 +18,31 @@ extension Binding {
                 handler(selection)
         })
     }
+    
+    func unwrap(binding: Binding<Value?>, fallback: Value) -> Binding<Value> {
+      return Binding(get: {
+        binding.wrappedValue ?? fallback
+      }, set: {
+        binding.wrappedValue = $0
+      })
+    }
+    
+//    func unwrap2( fallback: Value) -> Binding<Value> {
+//        return Binding(get: {
+//            self.wrappedValue ?? fallback
+//        }, set: {
+//            self.wrappedValue = $0
+//        })
+//    }
+
+}
+
+extension Binding where Value == String? {
+    func onNone(_ fallback: String) -> Binding<String> {
+        return Binding<String>(get: {
+            return self.wrappedValue ?? fallback
+        }) { value in
+            self.wrappedValue = value
+        }
+    }
 }

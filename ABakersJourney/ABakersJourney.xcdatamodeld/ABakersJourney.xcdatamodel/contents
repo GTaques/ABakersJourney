@@ -5,7 +5,7 @@
         <attribute name="isFarinha" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="percentage" optional="YES" attributeType="String"/>
-        <relationship name="belongsTo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="ingredient" inverseEntity="Recipe"/>
+        <relationship name="belongsTo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="ingredients" inverseEntity="Recipe"/>
     </entity>
     <entity name="Recipe" representedClassName=".Recipe" syncable="YES">
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -13,10 +13,10 @@
         <attribute name="imageData" optional="YES" attributeType="Binary"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="totalAmountOfFlour" optional="YES" attributeType="String"/>
-        <relationship name="ingredient" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ingredient" inverseName="belongsTo" inverseEntity="Ingredient"/>
+        <relationship name="ingredients" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ingredient" inverseName="belongsTo" inverseEntity="Ingredient"/>
     </entity>
     <elements>
-        <element name="Ingredient" positionX="-18" positionY="54" width="128" height="118"/>
-        <element name="Recipe" positionX="-45" positionY="0" width="128" height="133"/>
+        <element name="Ingredient" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Recipe" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>
