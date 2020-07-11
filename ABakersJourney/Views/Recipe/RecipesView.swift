@@ -11,108 +11,73 @@ import Combine
 
 struct RecipesView: View {
     
-    @ObservedObject var receitasViewModel: ReceitasViewModel
-    var recipe: Recipe = Recipe()
+    @ObservedObject var receitasViewModel: ReceitasViewModel = ReceitasViewModel()
     
     var body: some View {
-        GeometryReader { geometry in
-            ScrollView(.vertical) {
-                VStack(alignment: .leading) {
-                    Text("Hello Gabriel").font(.title).padding(EdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 0))
+        NavigationView {
+            GeometryReader { geometry in
+                ScrollView(.vertical) {
                     VStack(alignment: .leading) {
-                        HStack {
-                            Text("Newest").bold().font(.title)
-                            Spacer()
-                            Button(action: {
-                                print("Ver todos")
-                            }) {
-                                Text("Ver Mais")
-                            }
-                        }.padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 15))
-                        ScrollView(.horizontal) {
+                        VStack(alignment: .leading) {
                             HStack {
-                                ForEach(self.receitasViewModel.receitas.indices, id: \.self) { index in
-                                    RecipeCardView(recipe: self.$receitasViewModel.receitas[index], width: geometry.size.width * 0.38, height: geometry.size.width * 0.32).frame(width: geometry.size.width * 0.38, height: geometry.size.width * 0.32)
+                                Text("Newest").bold().font(.title)
+                                Spacer()
+                                Button(action: {
+                                }) {
+                                    Text("Ver Mais")
                                 }
-                            }
-                        }
-
-                    }.padding(EdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 0))
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Text("Popular").bold().font(.title)
-                            Spacer()
-                            Button(action: {
-                                print("Ver todos")
-                            }) {
-                                Text("Ver Mais")
-                            }
-                        }.padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 15))
-                        ScrollView(.horizontal) {
-                            HStack {
-                                ForEach(self.receitasViewModel.receitas.indices, id: \.self) { index in
-                                    VStack(alignment: .leading) {
-                                        RecipeCardView(recipe: self.$receitasViewModel.receitas[index], width: geometry.size.width * 0.38, height: geometry.size.width * 0.4).frame(width: geometry.size.width * 0.38, height: geometry.size.width * 0.4)
-                                        Text("Mixed Flours").bold()
-                                        Text("by: Author Name")
+                            }.padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 15))
+                            ScrollView(.horizontal) {
+                                HStack {
+                                    ForEach(self.receitasViewModel.recipes.indices , id: \.self) { i in
+                                        NavigationLink(destination: DetailsRecipe(recipe: self.receitasViewModel.recipes[i])) {
+                                            RecipeCardView(recipe: self.receitasViewModel.recipes[i], width: geometry.size.width * 0.38, height: geometry.size.width * 0.32).frame(width: geometry.size.width * 0.38, height: geometry.size.width * 0.32)
+                                        }
                                     }
-
                                 }
                             }
-                        }
-
-                    }.padding(EdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 0))
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Text("Last Made by You").bold().font(.title)
-                            Spacer()
-                            Button(action: {
-                                print("Ver todos")
-                            }) {
-                                Text("Ver Mais")
-                            }
-                        }.padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 15))
-                        ScrollView(.horizontal) {
-                            HStack {
-                                ForEach(self.receitasViewModel.receitas.indices, id: \.self) { index in
-                                    VStack(alignment: .leading) {
-                                        RecipeCardView(recipe: self.$receitasViewModel.receitas[index], width: geometry.size.width * 0.38, height: geometry.size.width * 0.46).frame(width: geometry.size.width * 0.38, height: geometry.size.width * 0.46)
-                                        Text("Mixed Flours").bold()
-                                        Text("by: Author Name")
-                                    }
-
-                                }
-                            }
-                        }
-
-                    }.padding(EdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 0))
+                        }.padding(EdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 0))
+                    }
                 }
-            }
-        }.onAppear(perform: loadRecipes)
+            }.onAppear(perform: loadRecipes)
+            .navigationBarTitle(Text("Hello Gabriel"))
+        }
+        
     }
     
     func loadRecipes() {
-        var recipesArray = [Recipe]()
-        EntityService.fetch(entity: recipe) { (result) in
-            switch result {
-            case .success(let newItem):
-                recipesArray.append(newItem as! Recipe)
-                self.receitasViewModel.receitas = recipesArray
-                if !self.receitasViewModel.receitas.isEmpty {
-                    self.receitasViewModel.receitas[0].scope = .new
-                    print("Loaded Recipes!")
+        CoreDataService.shared.getRecipes(predicate: nil, completion: { recipes in
+            self.receitasViewModel.recipes = recipes
+            print("Recipes: \(self.receitasViewModel.recipes)")
+            if self.receitasViewModel.recipes.count > 0 {
+                CoreDataService.shared.getIngredients(predicate: NSPredicate(format: "belongsTo == %@", self.receitasViewModel.recipes[0].objectID)) { ingredients in
+                    print(ingredients)
                 }
-                
-            case .failure(let err):
-                print(err.localizedDescription)
             }
+        })
+        
+        
+        //        var recipesArray = [Recipe]()
+//        EntityService.fetch(entity: recipe) { (result) in
+//            switch result {
+//            case .success(let newItem):
+//                recipesArray.append(newItem as! Recipe)
+//                self.receitasViewModel.receitas = recipesArray
+//                if !self.receitasViewModel.receitas.isEmpty {
+//                    self.receitasViewModel.receitas[0].scope = .new
+//                    print("Loaded Recipes!")
+//                }
+//                
+//            case .failure(let err):
+//                print(err.localizedDescription)
+//            }
         }
-    }
+    
 }
 
-struct RecipesView_Previews: PreviewProvider {
-    static var receitasViewModel = ReceitasViewModel()
-    static var previews: some View {
-        RecipesView(receitasViewModel: receitasViewModel)
-    }
-}
+//struct RecipesView_Previews: PreviewProvider {
+////    static var receitasViewModel = ReceitasViewModel()
+//    static var previews: some View {
+//        RecipesView(receitasViewModel: receitasViewModel)
+//    }
+//}

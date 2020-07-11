@@ -11,19 +11,23 @@ import CloudKit
 
 struct CreateRecipeView: View {
     
-    @ObservedObject var receitasViewModel: ReceitasViewModel
+    
+    @Environment(\.managedObjectContext) var managedObjectContext
     @ObservedObject var receitaViewModel: ReceitaViewModel = ReceitaViewModel()
+//    @ObservedObject var ingredientsViewModel: IngredientsViewModel = IngredientsViewModel()
     
     @State var showingCreateIngredient: Bool = false
     @State var showingActionSheet: Bool = false
     @State var showingImagePicker: Bool = false
-    @State var isEditMode: Bool = true
+    @State var showingAlert: Bool = false
     @State var sourceType: SourceType = .camera
+    @State var criterion: Criteria = .grams
+    
+    //Recipe Properties
     @State var image: UIImage?
+    var createdAt = Date()
     
-    
-    var steps: [String] = ["Ativar Fermento", "Autólise", "Adicionar Levain", "Adicionar Sal", "Laminação", "Dobra #1", "Dobra #2", "Dobra #3", "Modelagem"]
-    
+   
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
@@ -53,30 +57,56 @@ struct CreateRecipeView: View {
                                 ImagePicker(image: self.$image, source: self.$sourceType)
                             }
                         }
-                        RecipeIngredientsFormView(receitaViewModel: self.receitaViewModel, criterion: self.$receitaViewModel.receita.criterion, showingCreateIngredient: self.showingCreateIngredient)
-                    }.frame(width: geometry.size.width, height: geometry.size.height * 0.7)
-                }
-            }
-            .navigationBarTitle("Criar Receita")
-            .navigationBarItems(leading: EditButton(), trailing: Button(action: {
-                if !self.receitaViewModel.receita.title.isEmpty {
-                    EntityService.save(item: self.receitaViewModel.receita) { (result) in
-                        switch result {
-                        case .success( _):
-                            IngredientService.bulkSave(items: self.receitaViewModel.receita.ingredients, parentEntity: self.receitaViewModel.receita) { result in
-                                
+                        Section(header: Text("Ingredients")) {
+                            TextField("Quantidade Total de Farinha", text: self.$receitaViewModel.receita.totalAmountOfFlour).keyboardType(.numberPad)
+                            Picker("", selection: self.$receitaViewModel.receita.criterion) {
+                                ForEach(Criteria.allCases, id: \.self) { criterion in
+                                    Text(criterion.rawValue)
+                                }
+                            }.pickerStyle(SegmentedPickerStyle())
+                            if self.receitaViewModel.receita.criterion == .grams {
+                                List {
+                                    ForEach(self.receitaViewModel.receita.ingredients.indices, id: \.self) { i in
+                                        TextField(self.receitaViewModel.receita.ingredients[i].name, text: self.$receitaViewModel.receita.ingredients[i].amount).keyboardType(.numberPad)
+                                    }
+                                }
+                            } else {
+                                List {
+                                    ForEach(self.receitaViewModel.receita.ingredients.indices, id: \.self) { i in
+                                       TextField(self.receitaViewModel.receita.ingredients[i].name, text: self.$receitaViewModel.receita.ingredients[i].percentage).keyboardType(.numberPad)
+                                    }
+                                }
                             }
-                            print("saved")
-                        case .failure(let err):
-                            print(err.localizedDescription)
+                        }
+                        Button(action: {
+                            self.showingCreateIngredient = true
+                        }) {
+                            Text("Adicionar Ingrediente")
                         }
                     }
-                    self.receitaViewModel.receita = Recipe(title: "", description: "", category: .bread, totalAmountOfFlour: "", criterion: .grams, scope: .new)
                 }
-                print("Saved")
+            }.sheet(isPresented: self.$showingCreateIngredient) {
+                CreateIngredientView(receitaViewModel: self.receitaViewModel, showingCreateIngredient: self.$showingCreateIngredient, criterion: self.$criterion)
+            }
+            .navigationBarTitle("Criar Receita")
+            .navigationBarItems(leading: Button(action: {
+                CoreDataService.shared.flush()
+            }) {
+                Text("Flush")
+            }, trailing: Button(action: {
+                if !self.receitaViewModel.receita.title.isEmpty {
+                    CoreDataService.shared.saveRecipe(recipe: self.receitaViewModel.receita) {
+                        print("Saved!")
+                    }
+                } else {
+                    self.showingAlert.toggle()
+                }
             }) {
                 Text("Save")
-            }).gesture(DragGesture().onChanged{_ in UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)})
+            })
+        }.gesture(DragGesture().onChanged { _ in UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)})
+        .alert(isPresented: self.$showingAlert) {
+            Alert(title: Text("Please add a title"), dismissButton: Alert.Button.default(Text("Ok")))
         }
     }
 }
@@ -86,9 +116,9 @@ func delete(at offsets: IndexSet) {
 }
 
 
-struct CreateRecipeView_Previews: PreviewProvider {
-    static var receitasViewModel = ReceitasViewModel()
-    static var previews: some View {
-        CreateRecipeView(receitasViewModel: receitasViewModel)
-    }
-}
+//struct CreateRecipeView_Previews: PreviewProvider {
+//    static var receitasViewModel = ReceitasViewModel()
+//    static var previews: some View {
+//        CreateRecipeView(receitasViewModel: receitasViewModel)
+//    }
+//}

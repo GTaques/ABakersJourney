@@ -10,17 +10,16 @@ import SwiftUI
 
 struct ContentView: View {
     
-//    @EnvironmentObject var receitasViewModel: ReceitasViewModel 
-    @ObservedObject var receitasViewModel: ReceitasViewModel = ReceitasViewModel()
+    @Environment(\.managedObjectContext) var managedObjectContext
     
     var body: some View {
         TabView {
-            RecipesView(receitasViewModel: receitasViewModel)
+            RecipesView()
                 .tabItem {
                     Image(systemName: "book.fill")
                     Text("Receitas")
             }
-            CreateRecipeView(receitasViewModel: receitasViewModel)
+            CreateRecipeView()
                 .tabItem {
                     Image(systemName: "plus.square.fill")
                     Text("Criar Receita")

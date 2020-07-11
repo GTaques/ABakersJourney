@@ -8,21 +8,30 @@
 
 import SwiftUI
 import Combine
+import CoreData
 
 class ReceitaViewModel: ObservableObject {
-    @Published var receita: Recipe {
+    
+    var ingredients: [IngredientObject] = [
+        IngredientObject(isFarinha: true, name: "", amount: "", percentage: "")
+    ]
+    
+    @Published var receita: RecipeObject {
         didSet {
             receita.calculatePercentages(criterion: self.receita.criterion)
         }
     }
     
+    
     init() {
-        self.receita = Recipe(title: "", description: "", category: .bread, totalAmountOfFlour: "", criterion: .grams, scope: .new, ingredients: [
-            Ingredient(category: .Dough, name: "Farinha Branca", amount: "", percentage: "", isFarinha: true),
-            Ingredient(category: .Dough, name: "Água", amount: "", percentage: "", isFarinha: false),
-            Ingredient(category: .Dough, name: "Levain", amount: "", percentage: "", isFarinha: false),
-            Ingredient(category: .Dough, name: "Salt", amount: "", percentage: "", isFarinha: false),
-        ])
+        let ingredients =  [
+               IngredientObject(isFarinha: true, name: "Trigo", amount: "", percentage: ""),
+               IngredientObject(isFarinha: false, name: "Água", amount: "", percentage: ""),
+               IngredientObject(isFarinha: false, name: "Sal", amount: "", percentage: ""),
+               IngredientObject(isFarinha: false, name: "Levain", amount: "", percentage: "")
+        ]
+        
+        self.receita = RecipeObject(title: "", description: "", totalAmountOfFlour: "", ingredients: ingredients, createdAt: Date(), criterion: .grams)
     }
 }
 

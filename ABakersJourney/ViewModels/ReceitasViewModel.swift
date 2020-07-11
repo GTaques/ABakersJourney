@@ -8,9 +8,17 @@
 
 import SwiftUI
 import Combine
-import CloudKit
+import CoreData
 
 class ReceitasViewModel: ObservableObject {
-    @Published var receitas: [Recipe] = []
-    @Published var auxBool: Bool = false
+    
+    @Published var recipes: [Recipe] = []
+    
+//    init() {
+//        CoreDataService.shared.get(predicate: nil, completion: { recipes in
+//            self.recipes = recipes
+//        })
+//    }
+    
 }
+
